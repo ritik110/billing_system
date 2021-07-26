@@ -21,14 +21,25 @@ class _LoginpageState extends State<Loginpage> {
       color: Color(0xffe2e2e2),
       child: Center(
         child: Container(
-            height: height * 0.5,
-            width: width * 0.3,
+            height: 350,
+            width: 400,
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(80),
                     bottomLeft: Radius.circular(80),
-                    topRight: Radius.circular(80))),
+                    topRight: Radius.circular(80),
+                ),
+                boxShadow: [
+            BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 8,
+          blurRadius: 10,
+          offset: Offset(0, 3), // changes position of shadow
+        ),],
+      ),
+
+            
             child: Column(
               children: [
                 SizedBox(height: 30),

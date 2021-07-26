@@ -19,15 +19,15 @@ class _SubmitState extends State<Submit> {
           child: Card(
             elevation: 2,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: Container(
               alignment: Alignment.center,
               padding: EdgeInsets.all(1),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15), color: Colors.teal),
+                  borderRadius: BorderRadius.circular(30), color: Color(0xff009b63)),
               width: width * 0.05,
               height: height * 0.05,
-              child: Text("submit",
+              child: Text("Submit",
                   style: TextStyle(
                     color: Colors.white,
                   )),
