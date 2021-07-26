@@ -24,20 +24,22 @@ class _FieldState extends State<Field> {
             height: 45,
             width: width * 0.230,
             child: new TextFormField(
-
               cursorColor: Color(0xff009b63),
               style: TextStyle(
-                fontSize: 16,color: Color(0xff009b63),
+                fontSize: 16,
+                color: Color(0xff009b63),
               ),
               decoration: new InputDecoration(
                 enabledBorder: new OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: new BorderSide(color: Color(0xffe2e2e2),
-                    ),
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: new BorderSide(
+                    color: Color(0xffe2e2e2),
+                  ),
                 ),
                 focusedBorder: new OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: new BorderSide(color: Color(0xff009b63),
+                  borderSide: new BorderSide(
+                    color: Color(0xff009b63),
                   ),
                 ),
                 hintText: 'Enter your Username',
@@ -63,18 +65,21 @@ class _FieldState extends State<Field> {
             child: new TextFormField(
               cursorColor: Color(0xff009b63),
               style: TextStyle(
-                fontSize: 16,color: Color(0xff009b63),
+                fontSize: 16,
+                color: Color(0xff009b63),
               ),
               obscureText: isHiddenPassword,
               decoration: new InputDecoration(
                 enabledBorder: new OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: new BorderSide(color: Color(0xffe2e2e2),
+                  borderSide: new BorderSide(
+                    color: Color(0xffe2e2e2),
                   ),
                 ),
                 focusedBorder: new OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
-                  borderSide: new BorderSide(color: Color(0xff009b63),
+                  borderSide: new BorderSide(
+                    color: Color(0xff009b63),
                   ),
                 ),
                 hintText: 'Enter your Password',
@@ -88,8 +93,8 @@ class _FieldState extends State<Field> {
                 ),
                 labelText: 'Password',
                 labelStyle: TextStyle(
-                    color: Color(0xff009b63),
-                    fontSize: 14,
+                  color: Color(0xff009b63),
+                  fontSize: 14,
                 ),
                 prefixIcon: const Icon(
                   Icons.security,
