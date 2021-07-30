@@ -25,7 +25,7 @@ class _SubmitState extends State<Submit> {
               padding: EdgeInsets.all(1),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30), color: Color(0xff009b63)),
-              width: width * 0.05,
+              width: width * 0.08,
               height: height * 0.05,
               child: Text("Submit",
                   style: TextStyle(
