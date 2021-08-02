@@ -12,11 +12,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Billing System',
+      title: 'SNS IMS',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-      ),
+      theme: ThemeData(fontFamily: 'Konnect'),
       home: Loginpage(),
     );
   }

@@ -11,7 +11,7 @@ class text extends StatelessWidget {
         child: Text(
           "LOGIN",
           style: TextStyle(
-              color: Colors.teal[300],
+              color: Color(0xff009b63),
               fontSize: 30,
               fontWeight: FontWeight.bold),
         ),
