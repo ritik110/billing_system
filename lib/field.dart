@@ -22,7 +22,7 @@ class _FieldState extends State<Field> {
         children: [
           Container(
             height: 45,
-            width: width * 0.230,
+            width: 350,
             child: new TextFormField(
               cursorColor: Color(0xff009b63),
               style: TextStyle(
