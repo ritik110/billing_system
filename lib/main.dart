@@ -1,4 +1,5 @@
 import 'package:billing_system/field.dart';
+import 'package:billing_system/homescreen/homescreen.dart';
 import 'package:billing_system/loginpage.dart';
 import 'package:billing_system/submit.dart';
 import 'package:billing_system/text.dart';
@@ -14,8 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SNS IMS',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Konnect'),
-      home: Loginpage(),
+      theme: ThemeData(
+          fontFamily: 'Konnect',
+          primaryIconTheme: IconThemeData(color: Color(0xff009b63), size: 900)),
+      home: Homescreen(),
     );
   }
 }
