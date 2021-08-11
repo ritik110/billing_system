@@ -15,12 +15,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'SNS IMS',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          fontFamily: 'Konnect',
-          primaryIconTheme: IconThemeData(color: Color(0xff009b63), size: 900)),
-      home: Loginpage(),
-    );
+        title: 'SNS IMS',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            fontFamily: 'Konnect',
+            primaryIconTheme:
+                IconThemeData(color: Color(0xff009b63), size: 900)),
+        home: Loginpage());
   }
 }

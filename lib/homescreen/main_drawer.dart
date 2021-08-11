@@ -17,6 +17,7 @@ class _MaindrawerState extends State<Maindrawer> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+
     return Drawer(
         child: Container(
       color: Color(0xff009b63),
@@ -386,6 +387,44 @@ class _MaindrawerState extends State<Maindrawer> {
                     ],
                   ),
                   onTap: null,
+                ),
+                SizedBox(height: 80),
+                Row(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(1),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.white),
+                      width: 130,
+                      height: 40,
+                      child: Text("LOG IN",
+                          style: TextStyle(
+                            fontFamily: "Konnect",
+                            fontWeight: FontWeight.w900,
+                            color: Color(0xff009b63),
+                          )),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(1),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.white),
+                      width: 130,
+                      height: 40,
+                      child: Text("LOG OUT",
+                          style: TextStyle(
+                            fontFamily: "Konnect",
+                            fontWeight: FontWeight.w900,
+                            color: Color(0xff009b63),
+                          )),
+                    ),
+                  ],
                 ),
               ],
             ),
