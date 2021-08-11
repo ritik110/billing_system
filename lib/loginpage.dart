@@ -1,6 +1,6 @@
+import 'package:billing_system/homescreen/homescreen.dart';
 import 'package:billing_system/services/sheetsapi.dart';
 import 'package:billing_system/submit.dart';
-import 'package:billing_system/tempPage.dart';
 import 'package:billing_system/text.dart';
 import 'package:flutter/material.dart';
 
@@ -47,8 +47,8 @@ class _LoginpageState extends State<Loginpage> {
           //navigate to next page
           Navigator.pushReplacement(
               context,
-              //replace the TempPage with homepage in next line
-              MaterialPageRoute(builder: (BuildContext context) => TempPage()));
+              MaterialPageRoute(
+                  builder: (BuildContext context) => Homescreen()));
         } else if (user.password != password) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(

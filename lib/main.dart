@@ -1,4 +1,3 @@
-import 'package:billing_system/field.dart';
 import 'package:billing_system/homescreen/homescreen.dart';
 import 'package:billing_system/loginpage.dart';
 import 'package:billing_system/models/user.dart';
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           fontFamily: 'Konnect',
           primaryIconTheme: IconThemeData(color: Color(0xff009b63), size: 900)),
-      home: Homescreen(),
+      home: Loginpage(),
     );
   }
 }
