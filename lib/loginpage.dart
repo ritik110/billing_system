@@ -66,17 +66,16 @@ class _LoginpageState extends State<Loginpage> {
                         height: 10,
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(140, 0, 10, 0),
+                        padding: const EdgeInsets.fromLTRB(163, 0, 10, 0),
                         child: Row(
                           children: [
                             Text(
-                              "Did you forget\nyour Password?",
+                              "Forgot your\nPassword?",
                               style: TextStyle(
                                   fontFamily: 'KonnectI',
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xff009b63),
-                                  fontSize: 12
-                              ),
+                                  fontSize: 12),
                             ),
                             SizedBox(
                               width: 10,
@@ -102,8 +101,8 @@ class _LoginpageState extends State<Loginpage> {
                                             borderRadius:
                                                 BorderRadius.circular(30),
                                             color: Colors.white),
-                                        width: width * 0.08,
-                                        height: height * 0.05,
+                                        width: 120,
+                                        height: 35,
                                         child: Text("Reset\nPassword",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
