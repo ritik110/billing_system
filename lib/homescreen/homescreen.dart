@@ -72,7 +72,7 @@ class _HomescreenState extends State<Homescreen> {
               Center(
                 child: Container(
                   height: 45,
-                  width: width * 0.3256,
+                  width: width * 0.3356,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30), color: color),
                   child: new TextFormField(
@@ -96,7 +96,6 @@ class _HomescreenState extends State<Homescreen> {
                       fontSize: 16,
                       color: colorss,
                     ),
-
                     decoration: new InputDecoration(
                       contentPadding: EdgeInsets.all(0),
                       fillColor: color,
