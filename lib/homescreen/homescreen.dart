@@ -18,14 +18,14 @@ class _HomescreenState extends State<Homescreen> {
 
   @override
   void initState() {
-    _searchFocus.addListener((){
-      if(_searchFocus.hasFocus){
+    _searchFocus.addListener(() {
+      if (_searchFocus.hasFocus) {
         setState(() {
           color = Color(0xff009b63);
           colors = Colors.white;
           colorss = Colors.white;
         });
-      }else{
+      } else {
         setState(() {
           color = Colors.white;
           colors = Color(0xff009b63);
@@ -36,7 +36,6 @@ class _HomescreenState extends State<Homescreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -44,14 +43,16 @@ class _HomescreenState extends State<Homescreen> {
 
     return new Scaffold(
       key: _scaffoldKey,
-      drawer:new Maindrawer(),
+      drawer: new Maindrawer(),
       appBar: new AppBar(
         leading: Builder(
           builder: (context) => IconButton(
             icon: new Icon(MyFlutterApp.menu),
             iconSize: 10,
             color: Color(0xff009b63),
-            onPressed: () {Scaffold.of(context).openDrawer();},
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
           ),
         ),
         bottom: PreferredSize(
@@ -64,12 +65,15 @@ class _HomescreenState extends State<Homescreen> {
         title: Padding(
           padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              SizedBox(
+                width: width * 0.2604,
+              ),
               Center(
                 child: Container(
                   height: 45,
-                  width: 400,
+                  width: width * 0.3256,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30), color: color),
                   child: new TextFormField(
@@ -86,7 +90,7 @@ class _HomescreenState extends State<Homescreen> {
                     //         : colorss = Color(0xff5b5b5b);
                     //   });
                     // },
-                    autofocus:false,
+                    autofocus: false,
                     cursorColor: colorss,
                     style: TextStyle(
                       fontFamily: 'Konnect',
@@ -97,7 +101,6 @@ class _HomescreenState extends State<Homescreen> {
                     decoration: new InputDecoration(
                       contentPadding: EdgeInsets.all(0),
                       fillColor: color,
-
                       filled: true,
                       prefixIcon: new Icon(
                         MyFlutterApp.search_green,
@@ -119,19 +122,20 @@ class _HomescreenState extends State<Homescreen> {
                       hintText: 'Search',
                       hintStyle: TextStyle(
                           fontSize: 16, fontFamily: 'Konnect', color: colorss),
-
                     ),
                     focusNode: _searchFocus,
-
                   ),
                 ),
+              ),
+              SizedBox(
+                width: width * 0.2929,
               ),
               Builder(
                 builder: (context) => IconButton(
                   icon: new Icon(MyFlutterApp.exit),
                   alignment: Alignment.centerRight,
                   iconSize: 20,
-                  color:Color(0xff2e2e2e),
+                  color: Color(0xff2e2e2e),
                   onPressed: () {},
                 ),
               ),
@@ -140,7 +144,6 @@ class _HomescreenState extends State<Homescreen> {
         ),
         centerTitle: true,
       ),
-
       body: Center(
         child: Container(
           height: height,
