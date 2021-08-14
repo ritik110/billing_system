@@ -65,7 +65,6 @@ class _HomescreenState extends State<Homescreen> {
         title: Padding(
           padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
           child: Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(
                 width: width * 0.2604,
