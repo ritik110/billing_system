@@ -1,3 +1,4 @@
+import 'package:billing_system/customers/customers.dart';
 import 'package:billing_system/homescreen/main_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:billing_system/icons.dart';
@@ -21,8 +22,8 @@ class _HomescreenState extends State<Homescreen> {
     _searchFocus.addListener(() {
       if (_searchFocus.hasFocus) {
         setState(() {
-          color = Color(0xff009b63);
-          colors = Colors.white;
+          color = color == Color(0xff009b63) ? Colors.white : Color(0xff009b63);
+          colors = colors == Colors.white ? Color(0xff009b63) : Colors.white;
           colorss = Colors.white;
         });
       } else {
@@ -126,7 +127,16 @@ class _HomescreenState extends State<Homescreen> {
                 ),
               ),
               SizedBox(
-                width: width * 0.2929,
+                width: width * 0.2829,
+              ),
+              Builder(
+                builder: (context) => IconButton(
+                  icon: new Icon(MyFlutterApp.exit),
+                  alignment: Alignment.centerRight,
+                  iconSize: 20,
+                  color: Color(0xff2e2e2e),
+                  onPressed: () {},
+                ),
               ),
               Builder(
                 builder: (context) => IconButton(
@@ -146,7 +156,7 @@ class _HomescreenState extends State<Homescreen> {
         child: Container(
           height: height,
           width: width,
-          color: Color(0xffdfe9f1),
+          color: Colors.white,
         ),
       ),
     );
