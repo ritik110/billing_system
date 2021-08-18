@@ -1,3 +1,4 @@
+import 'package:billing_system/customers/customers.dart';
 import 'package:billing_system/text.dart';
 import 'package:flutter/material.dart';
 import 'package:billing_system/icons.dart';
@@ -20,11 +21,11 @@ class _MaindrawerState extends State<Maindrawer> {
     double width = MediaQuery.of(context).size.width;
     return Drawer(
         child: Column(
-          children: [
-            Container(
-              height: height-40,
-      color: Color(0xff009b63),
-      child: Column(
+      children: [
+        Container(
+          height: height - 40,
+          color: Color(0xff009b63),
+          child: Column(
             children: [
               Container(
                 width: double.infinity,
@@ -62,7 +63,13 @@ class _MaindrawerState extends State<Maindrawer> {
                           fontSize: 14,
                         ),
                       ),
-                      onTap: null,
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    Customers()));
+                      },
                     ),
                     SizedBox(
                       height: 20,
@@ -157,7 +164,8 @@ class _MaindrawerState extends State<Maindrawer> {
                                   height: 15,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 0, 12, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 12, 0),
                                   child: Text("Salary Satement",
                                       style: TextStyle(
                                           color: Colors.white,
@@ -194,7 +202,9 @@ class _MaindrawerState extends State<Maindrawer> {
                             onTap: () {
                               setState(() {
                                 salaryActive = !salaryActive;
-                                billActive ? billActive = !billActive : billActive;
+                                billActive
+                                    ? billActive = !billActive
+                                    : billActive;
                                 invoiceActive
                                     ? invoiceActive = !invoiceActive
                                     : invoiceActive;
@@ -226,7 +236,8 @@ class _MaindrawerState extends State<Maindrawer> {
                                   height: 5,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 0, 70, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 70, 0),
                                   child: Text(
                                     "Cash Bill",
                                     style: TextStyle(
@@ -239,7 +250,8 @@ class _MaindrawerState extends State<Maindrawer> {
                                   height: 15,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 0, 45, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 45, 0),
                                   child: Text("Payment Bill",
                                       style: TextStyle(
                                           color: Colors.white,
@@ -307,7 +319,8 @@ class _MaindrawerState extends State<Maindrawer> {
                                   height: 5,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 5, 0),
                                   child: Text(
                                     "Received Invoices",
                                     style: TextStyle(
@@ -320,7 +333,8 @@ class _MaindrawerState extends State<Maindrawer> {
                                   height: 15,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 0, 37, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 37, 0),
                                   child: Text("Sent Invoices",
                                       style: TextStyle(
                                           color: Colors.white,
@@ -357,7 +371,9 @@ class _MaindrawerState extends State<Maindrawer> {
                             onTap: () {
                               setState(() {
                                 invoiceActive = !invoiceActive;
-                                billActive ? billActive = !billActive : billActive;
+                                billActive
+                                    ? billActive = !billActive
+                                    : billActive;
                                 salaryActive
                                     ? salaryActive = !salaryActive
                                     : salaryActive;
@@ -413,7 +429,8 @@ class _MaindrawerState extends State<Maindrawer> {
                                   height: 15,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(39, 0, 0, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(39, 0, 0, 0),
                                   child: Text("Balance Sheet Satement",
                                       style: TextStyle(
                                           color: Colors.white,
@@ -424,7 +441,8 @@ class _MaindrawerState extends State<Maindrawer> {
                                   height: 15,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(18, 0, 0, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(18, 0, 0, 0),
                                   child: Text(
                                     "Cash Flow Statement",
                                     style: TextStyle(
@@ -463,7 +481,9 @@ class _MaindrawerState extends State<Maindrawer> {
                             onTap: () {
                               setState(() {
                                 statementActive = !statementActive;
-                                billActive ? billActive = !billActive : billActive;
+                                billActive
+                                    ? billActive = !billActive
+                                    : billActive;
                                 invoiceActive
                                     ? invoiceActive = !invoiceActive
                                     : invoiceActive;
@@ -486,33 +506,31 @@ class _MaindrawerState extends State<Maindrawer> {
                     SizedBox(
                       height: 40,
                     ),
-
                   ],
                 ),
               ),
-
             ],
-      ),
-    ),
-            Align(
-              alignment: Alignment(0.4,1),
-              child: Container(
-                height: 40,
-                width: double.infinity,
-                color: Color(0xff6b6b6b),
-                child: Builder(
-                  builder: (context) => IconButton(
-                    icon: new Icon(MyFlutterApp.back),
-                    iconSize: 20,
-                    color: Colors.white,
-                    onPressed: () {
-                      Scaffold.of(context).openEndDrawer();
-                    },
-                  ),
-                ),
+          ),
+        ),
+        Align(
+          alignment: Alignment(0.4, 1),
+          child: Container(
+            height: 40,
+            width: double.infinity,
+            color: Color(0xff6b6b6b),
+            child: Builder(
+              builder: (context) => IconButton(
+                icon: new Icon(MyFlutterApp.back),
+                iconSize: 20,
+                color: Colors.white,
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
               ),
             ),
-          ],
-        ));
+          ),
+        ),
+      ],
+    ));
   }
 }
