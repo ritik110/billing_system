@@ -1,3 +1,4 @@
+import 'package:billing_system/customers/customers.dart';
 import 'package:billing_system/homescreen/homescreen.dart';
 import 'package:billing_system/loginpage.dart';
 import 'package:billing_system/models/user.dart';
@@ -15,12 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'SNS IMS',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          fontFamily: 'Konnect',
-          primaryIconTheme: IconThemeData(color: Color(0xff009b63), size: 900)),
-      home: Loginpage(),
-    );
+        title: 'SNS IMS',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            fontFamily: 'Konnect',
+            primaryIconTheme:
+                IconThemeData(color: Color(0xff009b63), size: 900)),
+        home: Loginpage());
   }
 }

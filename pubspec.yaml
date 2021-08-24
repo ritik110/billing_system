@@ -67,6 +67,10 @@ flutter:
      fonts:
        - asset: assets/fonts/KonnectRegular.otf
 
+   - family: MyFlutterApp
+     fonts:
+       - asset: assets/MyFlutterApp.ttf
+
    - family: KonnectI
      fonts:
        - asset: assets/fonts/KonnectLightItalic.otf
