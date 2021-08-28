@@ -586,19 +586,6 @@ class _HomescreenState extends State<Homescreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30), color: color),
                     child: new TextFormField(
-                      // onTap: () {
-                      //   setState(() {
-                      //     color == Colors.white
-                      //         ? color = Color(0xff009b63)
-                      //         : color = Colors.white;
-                      //     colors == Color(0xff009b63)
-                      //         ? colors = Colors.white
-                      //         : colors = Color(0xff009b63);
-                      //     colorss == Color(0xff5b5b5b)
-                      //         ? colorss = Colors.white
-                      //         : colorss = Color(0xff5b5b5b);
-                      //   });
-                      // },
                       autofocus: false,
                       cursorColor: colorss,
                       style: TextStyle(
