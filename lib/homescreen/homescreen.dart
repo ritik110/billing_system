@@ -1,5 +1,4 @@
 import 'package:billing_system/customers/customers.dart';
-import 'package:billing_system/homescreen/main_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:billing_system/icons.dart';
 
@@ -510,15 +509,9 @@ class _HomescreenState extends State<Homescreen> {
                                 onTap: () {
                                   setState(() {
                                     statementActive = !statementActive;
-                                    billActive
-                                        ? billActive = !billActive
-                                        : billActive;
-                                    invoiceActive
-                                        ? invoiceActive = !invoiceActive
-                                        : invoiceActive;
-                                    salaryActive
-                                        ? salaryActive = !salaryActive
-                                        : salaryActive;
+                                    billActive = !billActive;
+                                    invoiceActive = !invoiceActive;
+                                    salaryActive = !salaryActive;
                                   });
                                 },
                                 child: Icon(
