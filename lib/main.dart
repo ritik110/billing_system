@@ -1,6 +1,7 @@
 import 'package:billing_system/customers/customers.dart';
 import 'package:billing_system/homescreen/homescreen.dart';
 import 'package:billing_system/products/addproduct.dart';
+import 'package:billing_system/products/product.dart';
 import 'package:billing_system/services/sheetsapi.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,6 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Konnect',
             primaryIconTheme:
                 IconThemeData(color: Color(0xff009b63), size: 900)),
-        home: Customers());
+        home: Product());
   }
 }
