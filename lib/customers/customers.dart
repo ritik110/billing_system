@@ -1,3 +1,5 @@
+import 'package:billing_system/components/tableheading.dart';
+import 'package:billing_system/components/tablerow.dart';
 import 'package:billing_system/customers/buttons.dart';
 import 'package:flutter/material.dart';
 
@@ -10,11 +12,11 @@ class Customers extends StatefulWidget {
 
 class _CustomersState extends State<Customers> {
   bool pressed = false;
-
+  List customers = [
+    for (int i = 0; i < 32; i++) [for (int j = 0; j < 8; j++) (i * j) + 1]
+  ];
   @override
   Widget build(BuildContext context) {
-    final maxlines = 6;
-
     return Material(
       child: Container(
         color: Color(0xffdfe9f1),
@@ -92,8 +94,35 @@ class _CustomersState extends State<Customers> {
                     style: TextStyle(color: Color(0xff2e2e2e), fontSize: 20))
               ],
             ),
-            SizedBox(
-              height: 300,
+            ClipRRect(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.92,
+                child: Column(children: [
+                  Heading(heading: [
+                    "Sn",
+                    "CUSTOMER",
+                    "ADDRESS",
+                    "CONTACT",
+                    "CONTRACTER",
+                    "CREDIT",
+                    "STATUS",
+                    "REMARKS"
+                  ]),
+                  Container(
+                    height: 600,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          for (int i = 0; i < customers.length; i++)
+                            Tablerow(customer: customers[i]),
+                          Tablerow(customer: ["", "", "", "", "", "", "", ""])
+                        ],
+                      ),
+                    ),
+                  ),
+                ]),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
