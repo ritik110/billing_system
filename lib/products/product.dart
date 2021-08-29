@@ -80,7 +80,10 @@ class _ProductState extends State<Product> {
           Container(
               width: MediaQuery.of(context).size.width,
               alignment: Alignment.centerRight,
-              child: Buttons(text: "Add Product"))
+              child: Buttons(
+                text: "Add Product",
+                color: Colors.green,
+              ))
         ],
       ),
     );

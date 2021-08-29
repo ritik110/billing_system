@@ -576,8 +576,8 @@ class _HomescreenState extends State<Homescreen> {
             padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
             child: Row(
               children: [
-                SizedBox(
-                  width: width * 0.2604,
+                Expanded(
+                  child: Container(),
                 ),
                 Center(
                   child: Container(
@@ -624,8 +624,8 @@ class _HomescreenState extends State<Homescreen> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: width * 0.2829,
+                Expanded(
+                  child: Container(),
                 ),
                 Builder(
                   builder: (context) => IconButton(

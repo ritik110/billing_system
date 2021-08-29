@@ -1,3 +1,4 @@
+import 'package:billing_system/models/customer.dart';
 import 'package:billing_system/models/user.dart';
 import 'package:gsheets/gsheets.dart';
 
@@ -18,13 +19,17 @@ class UserSheetsApi {
   static final _spreadSheetId = "1HhSohlxk-s_zvEIlaoM3p0l5rE0cPtRpIKPj_-2V8Q4";
   static final _gsheets = GSheets(_credentials);
   static Worksheet? _userSheet;
+  static Worksheet? _customerSheet;
 
   static Future init() async {
     try {
       final spreadsheet = await _gsheets.spreadsheet(_spreadSheetId);
       _userSheet = await _getWorkSheet(spreadsheet, title: "Users");
+      _customerSheet = await _getWorkSheet(spreadsheet, title: "Customers");
       final userheading = Userheadings.getFields();
+      final customerheadings = Customerheadings.getFields();
       _userSheet!.values.insertRow(1, userheading);
+      _customerSheet!.values.insertRow(1, customerheadings);
     } catch (e) {
       print("Init Error: $e");
     }
@@ -47,8 +52,23 @@ class UserSheetsApi {
     return json == null ? null : User.fromJson(json);
   }
 
-  static Future insert(List<Map<String, dynamic>> rowlist) async {
-    if (_userSheet == null) return;
-    _userSheet!.values.map.appendRows(rowlist);
+  static Future insertCustomer(List<Map<String, dynamic>> rowlist) async {
+    if (_customerSheet == null) return;
+    _customerSheet!.values.map.appendRows(rowlist);
+  }
+
+  static Future insertCustomerAt(Map<String, dynamic> rowlist, index) async {
+    if (_customerSheet == null) return;
+    _customerSheet!.values.map.insertRow(index + 2, rowlist);
+  }
+
+  static Future deleteCustomerAt(Sn) async {
+    if (_customerSheet == null) return;
+    return _customerSheet!.deleteRow(Sn + 2);
+  }
+
+  static Future getCustomers() async {
+    List customers = await _customerSheet!.values.allRows(fromRow: 2);
+    return customers ?? [];
   }
 }
