@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Heading extends StatelessWidget {
-  final List heading;
-  Heading({required this.heading});
+class Headingss extends StatelessWidget {
+  final List headingss;
+  Headingss({required this.headingss});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,23 +13,23 @@ class Heading extends StatelessWidget {
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         child: Row(
           children: [
-            for (int i = 0; i < heading.length; i++)
+            for (int i = 0; i < headingss.length; i++)
               Container(
                 padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                 height: 60,
                 width: i == 0
                     ? 40
                     : ((MediaQuery.of(context).size.width * 0.92 - 40) /
-                        (heading.length - 1)),
+                        (headingss.length - 1)),
                 decoration: BoxDecoration(
                     border: Border(
                         right: BorderSide(
-                            color: i == heading.length - 1
+                            color: i == headingss.length - 1
                                 ? Colors.transparent
                                 : Colors.black))),
                 child: Center(
                     child: Text(
-                  heading[i],
+                  headingss[i],
                   style: TextStyle(color: Colors.white),
                 )),
               )
