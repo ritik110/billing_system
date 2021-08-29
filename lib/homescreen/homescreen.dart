@@ -61,6 +61,7 @@ class _HomescreenState extends State<Homescreen> {
                   Container(
                     width: double.infinity,
                     padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+                    padding: EdgeInsets.fromLTRB(20, 40, 0, 0),
                     child: Column(
                       children: [
                         ListTile(
@@ -518,6 +519,15 @@ class _HomescreenState extends State<Homescreen> {
                                     billActive = !billActive;
                                     invoiceActive = !invoiceActive;
                                     salaryActive = !salaryActive;
+                                    billActive
+                                        ? billActive = !billActive
+                                        : billActive;
+                                    invoiceActive
+                                        ? invoiceActive = !invoiceActive
+                                        : invoiceActive;
+                                    salaryActive
+                                        ? salaryActive = !salaryActive
+                                        : salaryActive;
                                   });
                                 },
                                 child: Icon(
