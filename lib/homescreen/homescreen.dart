@@ -627,6 +627,14 @@ class _HomescreenState extends State<Homescreen> {
                 ),
                 SizedBox(
                   width: width * 0.2829,
+              ),
+              Builder(
+                builder: (context) => IconButton(
+                  icon: new Icon(MyFlutterApp.exit),
+                  alignment: Alignment.centerRight,
+                  iconSize: 20,
+                  color:Color(0xff383838),
+                  onPressed: () {},
                 ),
                 Builder(
                   builder: (context) => IconButton(
