@@ -30,7 +30,6 @@ class _MaindrawerState extends State<Maindrawer> {
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
-                padding: EdgeInsets.fromLTRB(20, 40, 0, 0),
                 child: Column(
                   children: [
                     ListTile(
@@ -511,8 +510,6 @@ class _MaindrawerState extends State<Maindrawer> {
                 ),
               ),
             ],
-<<<<<<< Updated upstream
-
           ),
         ),
         Align(
@@ -529,24 +526,6 @@ class _MaindrawerState extends State<Maindrawer> {
                 onPressed: () {
                   Scaffold.of(context).openEndDrawer();
                 },
-      ),
-    ),
-            Align(
-              alignment: Alignment(0.4,1),
-              child: Container(
-                height: 40,
-                width: double.infinity,
-                color: Color(0xff383838),
-                child: Builder(
-                  builder: (context) => IconButton(
-                    icon: new Icon(MyFlutterApp.back),
-                    iconSize: 20,
-                    color: Colors.white,
-                    onPressed: () {
-                      Scaffold.of(context).openEndDrawer();
-                    },
-                  ),
-                ),
               ),
             ),
           ),

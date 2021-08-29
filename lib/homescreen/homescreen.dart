@@ -1,4 +1,5 @@
 import 'package:billing_system/customers/customers.dart';
+import 'package:billing_system/staffs/staff.dart';
 import 'package:flutter/material.dart';
 import 'package:billing_system/icons.dart';
 
@@ -11,8 +12,8 @@ class Homescreen extends StatefulWidget {
 
 class _HomescreenState extends State<Homescreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  int active = 0;
-  List pages = [first_page(), Customers()];
+  int active = 2;
+  List pages = [first_page(), Customers(), Staffs()];
   Color color = Colors.white;
   Color colors = Color(0xff009b63);
   Color colorss = Color(0xff5b5b5b);
@@ -97,6 +98,7 @@ class _HomescreenState extends State<Homescreen> {
                             setState(() {
                               active = 1;
                             });
+                            Navigator.pop(context);
                           },
                         ),
                         SizedBox(
@@ -157,22 +159,26 @@ class _HomescreenState extends State<Homescreen> {
                           height: 20,
                         ),
                         ListTile(
-                          dense: true,
-                          leading: Icon(
-                            MyFlutterApp.staff,
-                            size: 20,
-                            color: Colors.white,
-                          ),
-                          title: Text(
-                            "Staff Details",
-                            style: TextStyle(
+                            dense: true,
+                            leading: Icon(
+                              MyFlutterApp.staff,
+                              size: 20,
                               color: Colors.white,
-                              fontFamily: "Konnect",
-                              fontSize: 14,
                             ),
-                          ),
-                          onTap: null,
-                        ),
+                            title: Text(
+                              "Staff Details",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Konnect",
+                                fontSize: 14,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                active = 2;
+                              });
+                              Navigator.pop(context);
+                            }),
                         ListTile(
                           dense: true,
                           subtitle: salaryActive

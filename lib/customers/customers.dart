@@ -16,16 +16,7 @@ class _CustomersState extends State<Customers> {
   bool pressed = false;
   int active = -1;
   List customers = [];
-  List heading = [
-    "Sn",
-    "CUSTOMER",
-    "ADDRESS",
-    "CONTACT",
-    "CONTRACTER",
-    "CREDIT",
-    "STATUS",
-    "REMARKS"
-  ];
+
   List customer = ["", "", "", "", "", "", "", ""];
 
   getCustomers() async {
@@ -381,6 +372,18 @@ class _CustomersState extends State<Customers> {
                         ),
                       ),
                     ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      active = -1;
+                      customer = ["", "", "", "", "", "", "", ""];
+                    });
+                  },
+                  child: Buttons(
+                    text: "Cancel",
+                    color: Colors.green,
                   ),
                 )
               ],

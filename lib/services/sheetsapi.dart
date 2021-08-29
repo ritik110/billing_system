@@ -1,4 +1,5 @@
 import 'package:billing_system/models/customer.dart';
+import 'package:billing_system/models/staff.dart';
 import 'package:billing_system/models/user.dart';
 import 'package:gsheets/gsheets.dart';
 
@@ -20,16 +21,20 @@ class UserSheetsApi {
   static final _gsheets = GSheets(_credentials);
   static Worksheet? _userSheet;
   static Worksheet? _customerSheet;
+  static Worksheet? _staffSheet;
 
   static Future init() async {
     try {
       final spreadsheet = await _gsheets.spreadsheet(_spreadSheetId);
       _userSheet = await _getWorkSheet(spreadsheet, title: "Users");
       _customerSheet = await _getWorkSheet(spreadsheet, title: "Customers");
+      _staffSheet = await _getWorkSheet(spreadsheet, title: "Staffs");
       final userheading = Userheadings.getFields();
       final customerheadings = Customerheadings.getFields();
+      final staffheadings = Staffheadings.getFields();
       _userSheet!.values.insertRow(1, userheading);
       _customerSheet!.values.insertRow(1, customerheadings);
+      _staffSheet!.values.insertRow(1, staffheadings);
     } catch (e) {
       print("Init Error: $e");
     }
@@ -59,7 +64,7 @@ class UserSheetsApi {
 
   static Future insertCustomerAt(Map<String, dynamic> rowlist, index) async {
     if (_customerSheet == null) return;
-    _customerSheet!.values.map.insertRow(index + 2, rowlist);
+    _customerSheet!.values.map.insertRow(index + 1, rowlist);
   }
 
   static Future deleteCustomerAt(Sn) async {
@@ -70,5 +75,26 @@ class UserSheetsApi {
   static Future getCustomers() async {
     List customers = await _customerSheet!.values.allRows(fromRow: 2);
     return customers ?? [];
+  }
+
+  static Future insertStaff(List<Map<String, dynamic>> rowlist) async {
+    if (_staffSheet == null) return;
+    _staffSheet!.values.map.appendRows(rowlist);
+  }
+
+  static Future insertStaffAt(Map<String, dynamic> rowlist, index) async {
+    if (_staffSheet == null) return;
+    _staffSheet!.values.map.insertRow(index + 1, rowlist);
+    print("inserted at: " + (index + 2).toString());
+  }
+
+  static Future deleteStaffAt(Sn) async {
+    if (_staffSheet == null) return;
+    return _staffSheet!.deleteRow(Sn + 2);
+  }
+
+  static Future getStaffs() async {
+    List staffs = await _staffSheet!.values.allRows(fromRow: 2);
+    return staffs ?? [];
   }
 }

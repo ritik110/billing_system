@@ -312,7 +312,16 @@ class _AddStaffState extends State<AddStaff> {
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [Buttons(text: "Cancel"), Buttons(text: "Save")],
+                children: [
+                  Buttons(
+                    text: "Cancel",
+                    color: Colors.green,
+                  ),
+                  Buttons(
+                    text: "Save",
+                    color: Colors.green,
+                  )
+                ],
               ),
             ),
           ],
