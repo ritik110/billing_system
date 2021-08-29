@@ -1,6 +1,5 @@
 import 'package:billing_system/homescreen/homescreen.dart';
 import 'package:billing_system/services/sheetsapi.dart';
-import 'package:billing_system/submit.dart';
 import 'package:billing_system/text.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +14,11 @@ class _LoginpageState extends State<Loginpage> {
   String? username;
   String? password;
   bool isHiddenPassword = true;
-  //username/password "admin", "productManager", "humanResource"
-  //note that username and password are same
-  //replace the navigator with home page
+  bool loading = false;
   loginUser() async {
+    setState(() {
+      loading = true;
+    });
     if (username == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -59,6 +59,9 @@ class _LoginpageState extends State<Loginpage> {
         }
       }
     }
+    setState(() {
+      loading = false;
+    });
   }
 
   void _togglePasswordView() {
@@ -216,9 +219,25 @@ class _LoginpageState extends State<Loginpage> {
                       child: GestureDetector(
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(240, 0, 10, 0),
-                          child: Submit(),
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.all(1),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Color(0xff009b63)),
+                            width: 130,
+                            height: 40,
+                            child: loading
+                                ? CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+                                : Text("Submit",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    )),
+                          ),
                         ),
-                        onTap: loginUser,
+                        onTap: loading ? () {} : loginUser,
                       ),
                     ),
                     SizedBox(
@@ -260,8 +279,8 @@ class _LoginpageState extends State<Loginpage> {
                                           borderRadius:
                                               BorderRadius.circular(30),
                                           color: Colors.white),
-                                      width: width * 0.08,
-                                      height: height * 0.05,
+                                      width: 120,
+                                      height: 40,
                                       child: Text("Reset\nPassword",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
