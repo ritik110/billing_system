@@ -75,6 +75,10 @@ flutter:
      fonts:
        - asset: assets/fonts/KonnectLightItalic.otf
 
+   - family: GeoramaRegular
+     fonts:
+       - asset: assets/fonts/Georama-Regular.ttf
+
   #     - family: Trajan Pro
 #       fonts:
 #         - asset: fonts/TrajanPro.ttf
