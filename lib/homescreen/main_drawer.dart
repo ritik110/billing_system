@@ -518,6 +518,7 @@ class _MaindrawerState extends State<Maindrawer> {
             height: 40,
             width: double.infinity,
             color: Color(0xff6b6b6b),
+            color: Color(0xff383838),
             child: Builder(
               builder: (context) => IconButton(
                 icon: new Icon(MyFlutterApp.back),

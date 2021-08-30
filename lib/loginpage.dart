@@ -219,6 +219,7 @@ class _LoginpageState extends State<Loginpage> {
                       child: GestureDetector(
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(240, 0, 10, 0),
+                          padding: const EdgeInsets.fromLTRB(230, 0, 20, 0),
                           child: Container(
                             alignment: Alignment.center,
                             padding: EdgeInsets.all(1),
@@ -231,6 +232,11 @@ class _LoginpageState extends State<Loginpage> {
                                 ? CircularProgressIndicator(
                                     color: Colors.white,
                                   )
+                                ? SizedBox(height: 20,width: 20,
+                                  child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                )
                                 : Text("Submit",
                                     style: TextStyle(
                                       color: Colors.white,
@@ -245,6 +251,7 @@ class _LoginpageState extends State<Loginpage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(140, 0, 10, 0),
+                      padding: const EdgeInsets.fromLTRB(140, 0, 20, 0),
                       child: Row(
                         children: [
                           Text(
@@ -279,7 +286,7 @@ class _LoginpageState extends State<Loginpage> {
                                           borderRadius:
                                               BorderRadius.circular(30),
                                           color: Colors.white),
-                                      width: 120,
+                                      width: 130,
                                       height: 40,
                                       child: Text("Reset\nPassword",
                                           textAlign: TextAlign.center,

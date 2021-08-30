@@ -7,6 +7,7 @@ class Tablerows extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
+      height: 30,
       width: MediaQuery.of(context).size.width * 0.92,
       child: Row(
         children: [
@@ -21,6 +22,7 @@ class Tablerows extends StatelessWidget {
                       (product.length - 1)),
               child: TextField(
                 cursorColor: Colors.black,
+                style:TextStyle(fontFamily: 'GeoramaRegular'),
                 cursorHeight: 20,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(

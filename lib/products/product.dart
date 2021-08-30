@@ -50,6 +50,8 @@ class _ProductState extends State<Product> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Material(
       child: Container(
         color: Color(0xffdfe9f1),
@@ -61,10 +63,13 @@ class _ProductState extends State<Product> {
                 Container(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(40, 20, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(40, 10, 0, 0),
                     child: Text(
                       "products",
+                      "Products",
                       style: TextStyle(
                         fontSize: 20,
+                        fontSize: 16,
                         color: Color(0xff2e2e2e),
                       ),
                     ),
@@ -72,10 +77,12 @@ class _ProductState extends State<Product> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: Icon(
                     Icons.keyboard_arrow_right,
                     color: Color(0xff2e2e2e),
                     size: 35,
+                    size: 24,
                   ),
                 )
               ],
@@ -87,9 +94,11 @@ class _ProductState extends State<Product> {
             ),
             SizedBox(
               height: 40,
+              height: height*0.03,
             ),
             Container(
               height: 500,
+              height: height*0.7,
               child: SingleChildScrollView(
                 child: Column(children: [
                   for (int k = 0; k < categories.length; k++)
@@ -106,6 +115,7 @@ class _ProductState extends State<Product> {
                           child: Column(children: [
                             Container(
                                 color: Colors.brown,
+                                color: Color(0xff5b5b5b),
                                 width: MediaQuery.of(context).size.width * 0.92,
                                 height: 50,
                                 child: Row(
@@ -117,9 +127,12 @@ class _ProductState extends State<Product> {
                                           const EdgeInsets.only(left: 32.0),
                                       child: Text(
                                         categories[k] == "-"
+                                        categories[k] == "-".toUpperCase()
                                             ? "Others"
                                             : categories[k],
                                         style: TextStyle(color: Colors.white),
+                                            : categories[k].toUpperCase(),
+                                        style: TextStyle(color: Colors.white,fontFamily: 'GeoramaRegular',fontSize: 18),
                                       ),
                                     ),
                                     Padding(
@@ -165,6 +178,7 @@ class _ProductState extends State<Product> {
                                                   products[i][3])
                                                 Container(
                                                   height: 50,
+                                                  height: 40,
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width *
@@ -181,6 +195,9 @@ class _ProductState extends State<Product> {
                                                                     color: Colors
                                                                         .black)),
                                                             height: 50,
+                                                                        .black,
+                                                                width:0.5)),
+                                                            height: 40,
                                                             width: j == 0
                                                                 ? 40
                                                                 : ((MediaQuery.of(context).size.width * 0.92 -
@@ -194,6 +211,17 @@ class _ProductState extends State<Product> {
                                                                     : products[i]
                                                                         [
                                                                         j - 1])))
+                                                            child: Padding(
+                                                              padding: const EdgeInsets.fromLTRB(8,0 , 0, 0),
+                                                              child: Text(j ==
+                                                                      0
+                                                                  ? (i + 1)
+                                                                      .toString()
+                                                                  : products[i]
+                                                                      [
+                                                                      j - 1],
+                                                                style:TextStyle(fontFamily: 'GeoramaRegular'),),
+                                                            ),)
                                                     ],
                                                   ),
                                                 )
@@ -224,12 +252,14 @@ class _ProductState extends State<Product> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.fromLTRB(50, 10, 65, 10),
                   child: Container(
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.white, width: 2),
                         borderRadius: BorderRadius.circular(5),
                         color: Colors.green),
                     height: 40,
+                    height: height*0.06,
                     width: 150,
                     child: Center(
                       child: Text(

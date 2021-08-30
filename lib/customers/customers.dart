@@ -160,6 +160,7 @@ class _CustomersState extends State<Customers> {
                                           decoration: BoxDecoration(
                                               color: active == i
                                                   ? Colors.green
+                                                  ? Color(0xff9b9b9b)
                                                   : Colors.white,
                                               border: Border.all(
                                                   color: Colors.black)),
