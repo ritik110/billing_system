@@ -11,7 +11,7 @@ class Homescreen extends StatefulWidget {
 
 class _HomescreenState extends State<Homescreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  int active = 3;
+  int active = 0;
   List pages = [first_page(), Customers(), Staffs(), Product()];
   Color color = Colors.white;
   Color colors = Color(0xff009b63);

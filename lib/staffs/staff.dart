@@ -80,45 +80,6 @@ class _StaffsState extends State<Staffs> {
             SizedBox(
               height: 40,
             ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        pressed = !pressed;
-                      });
-                    },
-                    child: Container(
-                      height: 15,
-                      width: 15,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Color(0xff2e2e2e),
-                          ),
-                          borderRadius: BorderRadius.circular(7.5)),
-                      child: pressed
-                          ? Center(
-                              child: Container(
-                                height: 8,
-                                width: 8,
-                                decoration: BoxDecoration(
-                                    color: Color(0xff2e2e2e),
-                                    borderRadius: BorderRadius.circular(4)),
-                              ),
-                            )
-                          : Container(),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text("Select All",
-                    style: TextStyle(color: Color(0xff2e2e2e), fontSize: 20))
-              ],
-            ),
             ClipRRect(
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
               child: Container(

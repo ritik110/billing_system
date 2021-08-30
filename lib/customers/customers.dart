@@ -17,7 +17,16 @@ class _CustomersState extends State<Customers> {
   List customers = [];
 
   List customer = ["", "", "", "", "", "", "", ""];
-
+  List heading = [
+    "Sn",
+    "CUSTOMER",
+    "ADDRESS",
+    "CONTACT",
+    "CONTRACTER",
+    "CREDIT",
+    "STATUS",
+    "REMARKS"
+  ];
   getCustomers() async {
     customers = await UserSheetsApi.getCustomers();
     customers.add(["", "", "", "", "", "", "", ""]);
@@ -42,103 +51,82 @@ class _CustomersState extends State<Customers> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Container(
-        color: Color(0xffdfe9f1),
-        child: Column(
+        child: Container(
+      color: Color(0xffdfe9f1),
+      child: Column(children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(40, 20, 0, 0),
-                    child: Text(
-                      "Customers",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Color(0xff2e2e2e),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                  child: Icon(
-                    Icons.keyboard_arrow_right,
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(40, 20, 0, 0),
+                child: Text(
+                  "Customers",
+                  style: TextStyle(
+                    fontSize: 20,
                     color: Color(0xff2e2e2e),
-                    size: 35,
-                    size: 32,
-                  ),
-                )
-              ],
-            ),
-            Divider(
-              thickness: 2,
-              height: 10,
-              height: 5,
-              color: Color(0xff2e2e2e),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
-                  padding: const EdgeInsets.fromLTRB(80, 0, 0, 0),
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        pressed = !pressed;
-                      });
-                    },
-                    child: Container(
-                      height: 15,
-                      width: 15,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Color(0xff2e2e2e),
-                          ),
-                          borderRadius: BorderRadius.circular(7.5)),
-                      child: pressed
-                          ? Center(
-                              child: Container(
-                                height: 8,
-                                width: 8,
-                                decoration: BoxDecoration(
-                                    color: Color(0xff2e2e2e),
-                                    borderRadius: BorderRadius.circular(4)),
-                              ),
-                            )
-                          : Container(),
-                    ),
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text("Select All",
-                    style: TextStyle(color: Color(0xff2e2e2e), fontSize: 20))
-              ],
+              ),
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-              child: Container(
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+              child: Icon(
+                Icons.keyboard_arrow_right,
+                color: Color(0xff2e2e2e),
+                size: 35,
+              ),
+            )
+          ],
+        ),
+        Divider(
+          thickness: 2,
+          height: 10,
+          color: Color(0xff2e2e2e),
+        ),
+        SizedBox(
+          height: 40,
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        ClipRRect(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+            child: Container(
                 width: MediaQuery.of(context).size.width * 0.92,
                 height: 460,
                 child: Column(children: [
-                  Heading(heading: [
-                    "Sn",
-                    "S.N",
-                    "CUSTOMER",
-                    "ADDRESS",
-                    "CONTACT",
-                    "CONTRACTER",
-                    "CREDIT",
-                    "STATUS",
-                    "REMARKS"
-                  ]),
-                  ],),
+                  Container(
+                      height: 60,
+                      width: MediaQuery.of(context).size.width * 0.92,
+                      decoration: BoxDecoration(
+                        color: Color(0xff009b63),
+                      ),
+                      child: Row(
+                        children: [
+                          for (int i = 0; i < heading.length; i++)
+                            Container(
+                              padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                              height: 60,
+                              width: i == 0
+                                  ? 40
+                                  : ((MediaQuery.of(context).size.width * 0.92 -
+                                          40) /
+                                      (heading.length - 1)),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      right: BorderSide(
+                                          color: i == heading.length - 1
+                                              ? Colors.transparent
+                                              : Colors.black))),
+                              child: Center(
+                                  child: Text(
+                                heading[i],
+                                style: TextStyle(color: Colors.white),
+                              )),
+                            )
+                        ],
+                      )),
                   Container(
                     height: 400,
                     width: MediaQuery.of(context).size.width * 0.92,
@@ -219,134 +207,39 @@ class _CustomersState extends State<Customers> {
                         ),
                       ),
                     ),
-                  ),
-                ]),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                InkWell(
-                    onTap: () async {
-                      if (active == customers.length - 1) {
-                        if (customer[0] != "" && customer[1] != "") {
-                          Customer newCustomer = Customer(
-                              customer: customer[1].toString(),
-                              address: customer[2].toString() == ""
-                                  ? "-"
-                                  : customer[2].toString(),
-                              contact: customer[3].toString() == ""
-                                  ? "-"
-                                  : customer[3].toString(),
-                              contracter: customer[4].toString() == ""
-                                  ? "-"
-                                  : customer[4].toString(),
-                              credit: customer[5].toString() == ""
-                                  ? "-"
-                                  : customer[5].toString(),
-                              status: customer[6].toString() == ""
-                                  ? "-"
-                                  : customer[6].toString(),
-                              remarks: customer[7].toString() == ""
-                                  ? "-"
-                                  : customer[7].toString());
-
-                          await UserSheetsApi.insertCustomer(
-                              [newCustomer.toJson()]);
-                          Future.delayed(Duration(seconds: 2)).then((value) {
-                            customer = ["", "", "", "", "", "", "", ""];
-                            active = -1;
-                            getCustomers();
-                            setState(() {});
-                          });
-                        }
-                      }
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white, width: 2),
-                          borderRadius: BorderRadius.circular(5),
-                          color: active == customers.length - 1
-                              ? Colors.green
-                              : Colors.grey,
-                        ),
-                        height: 40,
-                        width: 150,
-                        child: Center(
-                          child: Text(
-                            "Add Customer",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    )),
-                InkWell(
-                  onTap: () async {
-                    if (active >= 0 && active < customers.length - 1) {
-                      if (customer[0] != "" && customer[1] != "") {
-                        Map<String, dynamic> newCustomer = {
-                          "customer": customer[1].toString(),
-                          "address": customer[2].toString() == ""
+                  )
+                ]))),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            InkWell(
+                onTap: () async {
+                  if (active == customers.length - 1) {
+                    if (customer[0] != "" && customer[1] != "") {
+                      Customer newCustomer = Customer(
+                          customer: customer[1].toString(),
+                          address: customer[2].toString() == ""
                               ? "-"
                               : customer[2].toString(),
-                          "contact": customer[3].toString() == ""
+                          contact: customer[3].toString() == ""
                               ? "-"
                               : customer[3].toString(),
-                          "contracter": customer[4].toString() == ""
+                          contracter: customer[4].toString() == ""
                               ? "-"
                               : customer[4].toString(),
-                          "credit": customer[5].toString() == ""
+                          credit: customer[5].toString() == ""
                               ? "-"
                               : customer[5].toString(),
-                          "status": customer[6].toString() == ""
+                          status: customer[6].toString() == ""
                               ? "-"
                               : customer[6].toString(),
-                          "remarks": customer[7].toString() == ""
+                          remarks: customer[7].toString() == ""
                               ? "-"
-                              : customer[7].toString()
-                        };
+                              : customer[7].toString());
 
-                        await UserSheetsApi.insertCustomerAt(
-                            newCustomer, customer[0]);
-                        Future.delayed(Duration(seconds: 2)).then((value) {
-                          customer = ["", "", "", "", "", "", "", ""];
-                          active = -1;
-                          getCustomers();
-                          setState(() {});
-                        });
-                      }
-                    }
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 2),
-                        borderRadius: BorderRadius.circular(5),
-                        color: active >= 0 && active < customers.length - 1
-                            ? Colors.green
-                            : Colors.grey,
-                      ),
-                      height: 40,
-                      width: 150,
-                      child: Center(
-                        child: Text(
-                          "Edit Customer",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    if (active >= 0 && active < customers.length - 1) {
-                      UserSheetsApi.deleteCustomerAt(customer[0]);
+                      await UserSheetsApi.insertCustomer(
+                          [newCustomer.toJson()]);
                       Future.delayed(Duration(seconds: 2)).then((value) {
                         customer = ["", "", "", "", "", "", "", ""];
                         active = -1;
@@ -354,47 +247,138 @@ class _CustomersState extends State<Customers> {
                         setState(() {});
                       });
                     }
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 2),
-                        borderRadius: BorderRadius.circular(5),
-                        color: active >= 0 && active < customers.length - 1
-                            ? Colors.green
-                            : Colors.grey,
-                      ),
-                      height: 40,
-                      width: 150,
-                      child: Center(
-                        child: Text(
-                          "Delete",
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
+                  }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 2),
+                      borderRadius: BorderRadius.circular(5),
+                      color: active == customers.length - 1
+                          ? Colors.green
+                          : Colors.grey,
+                    ),
+                    height: 40,
+                    width: 150,
+                    child: Center(
+                      child: Text(
+                        "Add Customer",
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
                       ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      active = -1;
+                )),
+            InkWell(
+              onTap: () async {
+                if (active >= 0 && active < customers.length - 1) {
+                  if (customer[0] != "" && customer[1] != "") {
+                    Map<String, dynamic> newCustomer = {
+                      "customer": customer[1].toString(),
+                      "address": customer[2].toString() == ""
+                          ? "-"
+                          : customer[2].toString(),
+                      "contact": customer[3].toString() == ""
+                          ? "-"
+                          : customer[3].toString(),
+                      "contracter": customer[4].toString() == ""
+                          ? "-"
+                          : customer[4].toString(),
+                      "credit": customer[5].toString() == ""
+                          ? "-"
+                          : customer[5].toString(),
+                      "status": customer[6].toString() == ""
+                          ? "-"
+                          : customer[6].toString(),
+                      "remarks": customer[7].toString() == ""
+                          ? "-"
+                          : customer[7].toString()
+                    };
+
+                    await UserSheetsApi.insertCustomerAt(
+                        newCustomer, customer[0]);
+                    Future.delayed(Duration(seconds: 2)).then((value) {
                       customer = ["", "", "", "", "", "", "", ""];
+                      active = -1;
+                      getCustomers();
+                      setState(() {});
                     });
-                  },
-                  child: Buttons(
-                    text: "Cancel",
-                    color: Colors.green,
+                  }
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 2),
+                    borderRadius: BorderRadius.circular(5),
+                    color: active >= 0 && active < customers.length - 1
+                        ? Colors.green
+                        : Colors.grey,
                   ),
-                )
-              ],
+                  height: 40,
+                  width: 150,
+                  child: Center(
+                    child: Text(
+                      "Edit Customer",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                if (active >= 0 && active < customers.length - 1) {
+                  UserSheetsApi.deleteCustomerAt(customer[0]);
+                  Future.delayed(Duration(seconds: 2)).then((value) {
+                    customer = ["", "", "", "", "", "", "", ""];
+                    active = -1;
+                    getCustomers();
+                    setState(() {});
+                  });
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 2),
+                    borderRadius: BorderRadius.circular(5),
+                    color: active >= 0 && active < customers.length - 1
+                        ? Colors.green
+                        : Colors.grey,
+                  ),
+                  height: 40,
+                  width: 150,
+                  child: Center(
+                    child: Text(
+                      "Delete",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  active = -1;
+                  customer = ["", "", "", "", "", "", "", ""];
+                });
+              },
+              child: Buttons(
+                text: "Cancel",
+                color: Colors.green,
+              ),
             )
           ],
-        ),
-      ),
-    );
+        )
+      ]),
+    ));
   }
 }
