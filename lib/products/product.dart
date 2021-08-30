@@ -163,7 +163,9 @@ class _ProductState extends State<Product> {
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Icon(
-                                        Icons.keyboard_arrow_down,
+                                        active == k
+                                            ? Icons.keyboard_arrow_up
+                                            : Icons.keyboard_arrow_down,
                                         color: Colors.white,
                                         size: 32,
                                       ),
@@ -207,65 +209,29 @@ class _ProductState extends State<Product> {
                                                       0.92,
                                                   child: Row(
                                                     children: [
-                                                      for (int j = 0;
+                                                      for (int j =
+                                                              0;
                                                           j < 12;
                                                           j++)
                                                         Container(
-                                                          decoration: BoxDecoration(
-                                                              border: Border.all(
-                                                                  color: Colors
-                                                                      .black)),
-                                                          height: 50,
-                                                          width: j == 0
-                                                              ? 40
-                                                              : ((MediaQuery.of(context)
-                                                                              .size
-                                                                              .width *
-                                                                          0.92 -
-                                                                      40) /
-                                                                  (11)),
-                                                          child: j == 0 ||
-                                                                  i != active
-                                                              ? Center(
-                                                                  child: Text(j ==
-                                                                          0
-                                                                      ? (i + 1)
-                                                                          .toString()
-                                                                      : products[
-                                                                              i]
-                                                                          [
-                                                                          j - 1]))
-                                                              : TextField(
-                                                                  onChanged:
-                                                                      (val) {
-                                                                    if (active ==
-                                                                        i) {
-                                                                      product[0] =
-                                                                          i + 1;
-                                                                      product[j] =
-                                                                          val;
-                                                                    }
-                                                                    setState(
-                                                                        () {});
-                                                                  },
-                                                                  cursorColor:
-                                                                      Colors
-                                                                          .black,
-                                                                  cursorHeight:
-                                                                      20,
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                  decoration: InputDecoration(
-                                                                      focusedBorder: OutlineInputBorder(
-                                                                          borderSide: BorderSide(
-                                                                              color: Colors
-                                                                                  .black)),
-                                                                      hintText: products[i][j -
-                                                                              1]
-                                                                          .toString()),
-                                                                ),
-                                                        )
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                        .black)),
+                                                            height: 50,
+                                                            width: j == 0
+                                                                ? 40
+                                                                : ((MediaQuery.of(context).size.width * 0.92 -
+                                                                        40) /
+                                                                    (11)),
+                                                            child: Center(
+                                                                child: Text(j ==
+                                                                        0
+                                                                    ? (i + 1)
+                                                                        .toString()
+                                                                    : products[i]
+                                                                        [
+                                                                        j - 1])))
                                                     ],
                                                   ),
                                                 )

@@ -59,7 +59,6 @@ class _HomescreenState extends State<Homescreen> {
                 children: [
                   Container(
                     width: double.infinity,
-                    padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
                     padding: EdgeInsets.fromLTRB(20, 40, 0, 0),
                     child: Column(
                       children: [
