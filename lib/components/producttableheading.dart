@@ -6,7 +6,6 @@ class Headings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 60,
         height: 40,
         width: MediaQuery.of(context).size.width * 0.92,
         decoration: BoxDecoration(
@@ -31,7 +30,6 @@ class Headings extends StatelessWidget {
                 child: Center(
                     child: Text(
                   headings[i],
-                  style: TextStyle(color: Colors.white),
                   style: TextStyle(color: Colors.white, fontFamily: 'GeoramaRegular'),
                 )),
               )

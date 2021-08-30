@@ -6,7 +6,6 @@ class Tablerows extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
       height: 30,
       width: MediaQuery.of(context).size.width * 0.92,
       child: Row(

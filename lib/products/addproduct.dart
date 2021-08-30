@@ -463,15 +463,6 @@ class _AddproductState extends State<Addproduct> {
                 setState(() {});
               }
             },
-            child: Container(
-              width: 200,
-              height: 50,
-              color: Colors.green,
-              child: Center(
-                  child: Text(
-                "Add Products",
-                style: TextStyle(color: Colors.white),
-              )),
             child: Row(
               children: [
                 Container(

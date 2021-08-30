@@ -648,7 +648,6 @@ class _HomescreenState extends State<Homescreen> {
                 ),
                 Builder(
                     builder: (context) => IconButton(
-                          icon: new Icon(MyFlutterApp.exit),
                           icon: new Icon(Icons.settings_accessibility),
                           alignment: Alignment.centerRight,
                           iconSize: 20,

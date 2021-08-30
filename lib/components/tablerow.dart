@@ -23,11 +23,9 @@ class Tablerow extends StatelessWidget {
                 cursorColor: Colors.black,
                 style:TextStyle(fontFamily: 'GeoramaRegular'),
                 cursorHeight: 20,
-                textAlign: TextAlign.center,
                 textAlign: TextAlign.left,
                 decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black)),
                         borderSide: BorderSide(color: Colors.black), ),
                     hintText: customer[i].toString()),
               ),

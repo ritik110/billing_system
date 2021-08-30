@@ -30,7 +30,6 @@ class Heading extends StatelessWidget {
                 child: Center(
                     child: Text(
                   heading[i],
-                  style: TextStyle(color: Colors.white),
                   style: TextStyle(color: Colors.white, fontFamily: 'GeoramaRegular'),
                 )),
               )

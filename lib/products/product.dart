@@ -62,13 +62,10 @@ class _ProductState extends State<Product> {
               children: [
                 Container(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(40, 20, 0, 0),
                     padding: const EdgeInsets.fromLTRB(40, 10, 0, 0),
                     child: Text(
-                      "products",
                       "Products",
                       style: TextStyle(
-                        fontSize: 20,
                         fontSize: 16,
                         color: Color(0xff2e2e2e),
                       ),
@@ -76,12 +73,10 @@ class _ProductState extends State<Product> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: Icon(
                     Icons.keyboard_arrow_right,
                     color: Color(0xff2e2e2e),
-                    size: 35,
                     size: 24,
                   ),
                 )
@@ -93,11 +88,9 @@ class _ProductState extends State<Product> {
               color: Color(0xff2e2e2e),
             ),
             SizedBox(
-              height: 40,
               height: height*0.03,
             ),
             Container(
-              height: 500,
               height: height*0.7,
               child: SingleChildScrollView(
                 child: Column(children: [
@@ -114,7 +107,6 @@ class _ProductState extends State<Product> {
                           borderRadius: BorderRadius.circular(20),
                           child: Column(children: [
                             Container(
-                                color: Colors.brown,
                                 color: Color(0xff5b5b5b),
                                 width: MediaQuery.of(context).size.width * 0.92,
                                 height: 50,
@@ -126,11 +118,8 @@ class _ProductState extends State<Product> {
                                       padding:
                                           const EdgeInsets.only(left: 32.0),
                                       child: Text(
-                                        categories[k] == "-"
                                         categories[k] == "-".toUpperCase()
                                             ? "Others"
-                                            : categories[k],
-                                        style: TextStyle(color: Colors.white),
                                             : categories[k].toUpperCase(),
                                         style: TextStyle(color: Colors.white,fontFamily: 'GeoramaRegular',fontSize: 18),
                                       ),
@@ -149,9 +138,9 @@ class _ProductState extends State<Product> {
                                 )),
                             k == active
                                 ? Heading(heading: [
-                                    "Sn",
+                                    "SN",
                                     "Product Name",
-                                    "location",
+                                    "Location",
                                     "Company Name",
                                     "Category",
                                     "Sell per",
@@ -177,7 +166,6 @@ class _ProductState extends State<Product> {
                                               if (categories[k] ==
                                                   products[i][3])
                                                 Container(
-                                                  height: 50,
                                                   height: 40,
                                                   width: MediaQuery.of(context)
                                                           .size
@@ -193,8 +181,6 @@ class _ProductState extends State<Product> {
                                                             decoration: BoxDecoration(
                                                                 border: Border.all(
                                                                     color: Colors
-                                                                        .black)),
-                                                            height: 50,
                                                                         .black,
                                                                 width:0.5)),
                                                             height: 40,
@@ -203,14 +189,6 @@ class _ProductState extends State<Product> {
                                                                 : ((MediaQuery.of(context).size.width * 0.92 -
                                                                         40) /
                                                                     (11)),
-                                                            child: Center(
-                                                                child: Text(j ==
-                                                                        0
-                                                                    ? (i + 1)
-                                                                        .toString()
-                                                                    : products[i]
-                                                                        [
-                                                                        j - 1])))
                                                             child: Padding(
                                                               padding: const EdgeInsets.fromLTRB(8,0 , 0, 0),
                                                               child: Text(j ==
@@ -251,14 +229,12 @@ class _ProductState extends State<Product> {
                               )));
                 },
                 child: Padding(
-                  padding: const EdgeInsets.all(20),
                   padding: const EdgeInsets.fromLTRB(50, 10, 65, 10),
                   child: Container(
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.white, width: 2),
                         borderRadius: BorderRadius.circular(5),
                         color: Colors.green),
-                    height: 40,
                     height: height*0.06,
                     width: 150,
                     child: Center(

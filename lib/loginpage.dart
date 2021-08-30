@@ -218,7 +218,6 @@ class _LoginpageState extends State<Loginpage> {
                       cursor: SystemMouseCursors.click,
                       child: GestureDetector(
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(240, 0, 10, 0),
                           padding: const EdgeInsets.fromLTRB(230, 0, 20, 0),
                           child: Container(
                             alignment: Alignment.center,
@@ -229,9 +228,6 @@ class _LoginpageState extends State<Loginpage> {
                             width: 130,
                             height: 40,
                             child: loading
-                                ? CircularProgressIndicator(
-                                    color: Colors.white,
-                                  )
                                 ? SizedBox(height: 20,width: 20,
                                   child: CircularProgressIndicator(
                                       color: Colors.white,
@@ -250,7 +246,6 @@ class _LoginpageState extends State<Loginpage> {
                       height: 10,
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(140, 0, 10, 0),
                       padding: const EdgeInsets.fromLTRB(140, 0, 20, 0),
                       child: Row(
                         children: [
