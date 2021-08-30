@@ -108,4 +108,9 @@ class UserSheetsApi {
     List products = await _productSheet!.values.allRows(fromRow: 2);
     return products;
   }
+
+  static Future insertProduct(List<Map<String, dynamic>> rowlist) async {
+    if (_productSheet == null) return;
+    _productSheet!.values.map.appendRows(rowlist);
+  }
 }

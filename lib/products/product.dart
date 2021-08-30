@@ -1,6 +1,7 @@
 import 'package:billing_system/components/tableheading.dart';
 import 'package:billing_system/components/tablerow.dart';
 import 'package:billing_system/models/product.dart';
+import 'package:billing_system/products/addproduct.dart';
 import 'package:billing_system/services/sheetsapi.dart';
 import 'package:flutter/material.dart';
 
@@ -248,22 +249,33 @@ class _ProductState extends State<Product> {
                 ]),
               ),
             ),
-            InkWell(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 2),
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.green),
-                  height: 40,
-                  width: 150,
-                  child: Center(
-                    child: Text(
-                      "Add Product",
-                      style: TextStyle(
-                        color: Colors.white,
+            Container(
+              width: double.infinity,
+              alignment: Alignment.centerRight,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => Addproduct(
+                                categories: categories,
+                              )));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 2),
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.green),
+                    height: 40,
+                    width: 150,
+                    child: Center(
+                      child: Text(
+                        "Add Product",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),

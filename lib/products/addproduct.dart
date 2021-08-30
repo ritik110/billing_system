@@ -1,14 +1,31 @@
 import 'package:billing_system/customers/buttons.dart';
+import 'package:billing_system/models/product.dart';
+import 'package:billing_system/services/sheetsapi.dart';
 import 'package:flutter/material.dart';
 
 class Addproduct extends StatefulWidget {
-  const Addproduct({Key? key}) : super(key: key);
-
+  final List categories;
+  Addproduct({required this.categories});
   @override
   _AddproductState createState() => _AddproductState();
 }
 
 class _AddproductState extends State<Addproduct> {
+  String name = "",
+      size = "",
+      cName = "",
+      cPrice = "",
+      category = "Category",
+      color = "",
+      location = "",
+      unit = "",
+      adate = DateTime.now().day.toString() +
+          "/" +
+          DateTime.now().month.toString() +
+          "/" +
+          DateTime.now().year.toString(),
+      edate = "",
+      stock = "";
   BoxDecoration circle = BoxDecoration(
       border: Border.all(width: 6, color: Color(0xff009b63)),
       color: Colors.white,
@@ -29,7 +46,6 @@ class _AddproductState extends State<Addproduct> {
     return Material(
       color: Color(0xffdfe9f1),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
               child: Column(children: [
@@ -106,21 +122,66 @@ class _AddproductState extends State<Addproduct> {
                           height: 40,
                           width: MediaQuery.of(context).size.width * 0.45,
                           child: TextField(
+                              onChanged: (val) {
+                                setState(() {
+                                  name = val;
+                                });
+                              },
                               cursorColor: Colors.black,
                               cursorHeight: 20,
                               decoration: fieldss)),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(60, 30, 0, 0),
-                        child: Container(
-                          height: 35,
-                          width: 160,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Text(
-                            "Category",
-                            style: TextStyle(color: Colors.white),
+                        child: GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) => Dialog(
+                                      child: Container(
+                                        width: 200,
+                                        height: 400,
+                                        padding: EdgeInsets.all(8),
+                                        color: Colors.black,
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              for (int i = 0;
+                                                  i < widget.categories.length;
+                                                  i++)
+                                                Padding(
+                                                  padding: EdgeInsets.all(4),
+                                                  child: GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          category = widget
+                                                              .categories[i];
+                                                        });
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: Text(
+                                                        widget.categories[i],
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      )),
+                                                )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ));
+                          },
+                          child: Container(
+                            height: 35,
+                            width: 160,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Text(
+                              category,
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       )
@@ -139,6 +200,11 @@ class _AddproductState extends State<Addproduct> {
                           height: 40,
                           width: 100,
                           child: TextField(
+                              onChanged: (val) {
+                                setState(() {
+                                  size = val;
+                                });
+                              },
                               cursorColor: Colors.black,
                               cursorHeight: 20,
                               decoration: fieldss)),
@@ -153,6 +219,11 @@ class _AddproductState extends State<Addproduct> {
                           height: 40,
                           width: 100,
                           child: TextField(
+                              onChanged: (val) {
+                                setState(() {
+                                  color = val;
+                                });
+                              },
                               cursorColor: Colors.black,
                               cursorHeight: 20,
                               decoration: fieldss)),
@@ -167,6 +238,11 @@ class _AddproductState extends State<Addproduct> {
                           height: 40,
                           width: 100,
                           child: TextField(
+                              onChanged: (val) {
+                                setState(() {
+                                  location = val;
+                                });
+                              },
                               cursorColor: Colors.black,
                               cursorHeight: 20,
                               decoration: fieldss)),
@@ -187,23 +263,11 @@ class _AddproductState extends State<Addproduct> {
                             height: 40,
                             width: 400,
                             child: TextField(
-                                cursorColor: Colors.black,
-                                cursorHeight: 20,
-                                decoration: fieldss)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(70, 60, 0, 0),
-                        child: Text(
-                          "Units :  ",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                        child: Container(
-                            height: 40,
-                            width: 100,
-                            child: TextField(
+                                onChanged: (val) {
+                                  setState(() {
+                                    cName = val;
+                                  });
+                                },
                                 cursorColor: Colors.black,
                                 cursorHeight: 20,
                                 decoration: fieldss)),
@@ -225,14 +289,36 @@ class _AddproductState extends State<Addproduct> {
                             height: 40,
                             width: 250,
                             child: TextField(
+                                onChanged: (val) {
+                                  setState(() {
+                                    cPrice = val;
+                                  });
+                                },
                                 cursorColor: Colors.black,
                                 cursorHeight: 20,
                                 decoration: fieldss)),
                       ),
+                      // Padding(
+                      //   padding: const EdgeInsets.fromLTRB(40, 60, 0, 0),
+                      //   child: Text(
+                      //     "Selling Price(Per Unit) :  ",
+                      //     style: TextStyle(fontSize: 16),
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                      //   child: Container(
+                      //       height: 40,
+                      //       width: 250,
+                      //       child: TextField(
+                      //           cursorColor: Colors.black,
+                      //           cursorHeight: 20,
+                      //           decoration: fieldss)),
+                      // ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(40, 60, 0, 0),
+                        padding: const EdgeInsets.fromLTRB(60, 60, 0, 0),
                         child: Text(
-                          "Selling Price(Per Unit) :  ",
+                          "Unit :  ",
                           style: TextStyle(fontSize: 16),
                         ),
                       ),
@@ -242,16 +328,14 @@ class _AddproductState extends State<Addproduct> {
                             height: 40,
                             width: 250,
                             child: TextField(
+                                onChanged: (val) {
+                                  setState(() {
+                                    unit = val;
+                                  });
+                                },
                                 cursorColor: Colors.black,
                                 cursorHeight: 20,
                                 decoration: fieldss)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(60, 60, 0, 0),
-                        child: Text(
-                          "Profit% :  ",
-                          style: TextStyle(fontSize: 16),
-                        ),
                       ),
                     ],
                   ),
@@ -265,43 +349,131 @@ class _AddproductState extends State<Addproduct> {
                         ),
                       ),
                       Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                        child: Container(
+                            height: 40,
+                            width: 250,
+                            child: TextField(
+                                enabled: false,
+                                controller: TextEditingController(text: adate),
+                                cursorColor: Colors.black,
+                                cursorHeight: 20,
+                                decoration: fieldss)),
+                      ),
+                      Padding(
                         padding: const EdgeInsets.fromLTRB(60, 60, 0, 0),
                         child: Text(
                           "Expiry Date :  ",
                           style: TextStyle(fontSize: 16),
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                        child: Container(
+                            height: 40,
+                            width: 250,
+                            child: TextField(
+                                onChanged: (val) {
+                                  setState(() {
+                                    edate = val;
+                                  });
+                                },
+                                cursorColor: Colors.black,
+                                cursorHeight: 20,
+                                decoration: fieldss)),
+                      ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 60, 0, 0),
-                    child: Text(
-                      "Remarks  ",
-                      style: TextStyle(fontSize: 16),
+                  Row(children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(60, 60, 0, 0),
+                      child: Text(
+                        "Stock :  ",
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
-                    child: Container(
-                        height: 100,
-                        width: width * 0.85,
-                        child: TextField(
-                            cursorColor: Colors.black,
-                            cursorHeight: 20,
-                            maxLines: 6,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  width: 1.5,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ))),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                      child: Container(
+                          height: 40,
+                          width: 250,
+                          child: TextField(
+                              onChanged: (val) {
+                                setState(() {
+                                  stock = val;
+                                });
+                              },
+                              cursorColor: Colors.black,
+                              cursorHeight: 20,
+                              decoration: fieldss)),
+                    )
+                  ]),
+                  // Padding(
+                  //   padding: const EdgeInsets.fromLTRB(20, 60, 0, 0),
+                  //   child: Text(
+                  //     "Remarks  ",
+                  //     style: TextStyle(fontSize: 16),
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
+                  //   child: Container(
+                  //       height: 100,
+                  //       width: width * 0.85,
+                  //       child: TextField(
+                  //           cursorColor: Colors.black,
+                  //           cursorHeight: 20,
+                  //           maxLines: 6,
+                  //           decoration: InputDecoration(
+                  //             enabledBorder: OutlineInputBorder(
+                  //               borderSide: BorderSide(
+                  //                 width: 1.5,
+                  //                 color: Colors.black,
+                  //               ),
+                  //             ),
+                  //           ))),
+                  // ),
+                  SizedBox(
+                    height: 16,
+                  )
                 ],
               ),
             ),
           ])),
+          SizedBox(
+            height: 32,
+          ),
+          GestureDetector(
+            onTap: () async {
+              Product newProduct = Product(
+                  productName: name,
+                  location: location,
+                  companyName: cName,
+                  category: category,
+                  sellPer: unit,
+                  unit: unit,
+                  sizeQuantity: size,
+                  color: color,
+                  costPrice: cPrice,
+                  expDate: edate,
+                  stockQuantity: stock);
+              if (name != "") {
+                await UserSheetsApi.insertProduct([newProduct.toJson()]);
+                Navigator.pop(context);
+                setState(() {});
+              }
+            },
+            child: Container(
+              width: 200,
+              height: 50,
+              color: Colors.green,
+              child: Center(
+                  child: Text(
+                "Add Products",
+                style: TextStyle(color: Colors.white),
+              )),
+            ),
+          )
         ],
       ),
     );
