@@ -26,5 +26,6 @@ class MyApp extends StatelessWidget {
             primaryIconTheme:
                 IconThemeData(color: Color(0xff009b63), size: 900)),
         home: Homescreen());
+        home: Customers());
   }
 }
