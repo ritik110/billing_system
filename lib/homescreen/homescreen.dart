@@ -1,19 +1,18 @@
 import 'package:billing_system/customers/customers.dart';
+import 'package:billing_system/products/product.dart';
 import 'package:billing_system/staffs/staff.dart';
 import 'package:flutter/material.dart';
 import 'package:billing_system/icons.dart';
 
 class Homescreen extends StatefulWidget {
-  const Homescreen({Key? key}) : super(key: key);
-
   @override
   _HomescreenState createState() => _HomescreenState();
 }
 
 class _HomescreenState extends State<Homescreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  int active = 2;
-  List pages = [first_page(), Customers(), Staffs()];
+  int active = 3;
+  List pages = [first_page(), Customers(), Staffs(), Product()];
   Color color = Colors.white;
   Color colors = Color(0xff009b63);
   Color colorss = Color(0xff5b5b5b);
@@ -119,7 +118,12 @@ class _HomescreenState extends State<Homescreen> {
                               fontSize: 14,
                             ),
                           ),
-                          onTap: null,
+                          onTap: () {
+                            setState(() {
+                              active = 3;
+                            });
+                            Navigator.pop(context);
+                          },
                         ),
                         ListTile(
                           dense: true,
@@ -641,15 +645,6 @@ class _HomescreenState extends State<Homescreen> {
                           color: Color(0xff383838),
                           onPressed: () {},
                         )),
-                Builder(
-                  builder: (context) => IconButton(
-                    icon: new Icon(MyFlutterApp.exit),
-                    alignment: Alignment.centerRight,
-                    iconSize: 20,
-                    color: Color(0xff2e2e2e),
-                    onPressed: () {},
-                  ),
-                ),
                 Builder(
                   builder: (context) => IconButton(
                     icon: new Icon(MyFlutterApp.exit),

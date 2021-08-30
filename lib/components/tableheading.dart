@@ -9,8 +9,8 @@ class Heading extends StatelessWidget {
         height: 60,
         width: MediaQuery.of(context).size.width * 0.92,
         decoration: BoxDecoration(
-            color: Color(0xff009b63),
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+          color: Color(0xff009b63),
+        ),
         child: Row(
           children: [
             for (int i = 0; i < heading.length; i++)

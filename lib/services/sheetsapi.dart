@@ -1,4 +1,5 @@
 import 'package:billing_system/models/customer.dart';
+import 'package:billing_system/models/product.dart';
 import 'package:billing_system/models/staff.dart';
 import 'package:billing_system/models/user.dart';
 import 'package:gsheets/gsheets.dart';
@@ -22,6 +23,7 @@ class UserSheetsApi {
   static Worksheet? _userSheet;
   static Worksheet? _customerSheet;
   static Worksheet? _staffSheet;
+  static Worksheet? _productSheet;
 
   static Future init() async {
     try {
@@ -29,12 +31,16 @@ class UserSheetsApi {
       _userSheet = await _getWorkSheet(spreadsheet, title: "Users");
       _customerSheet = await _getWorkSheet(spreadsheet, title: "Customers");
       _staffSheet = await _getWorkSheet(spreadsheet, title: "Staffs");
+      _productSheet = await _getWorkSheet(spreadsheet, title: "Products");
       final userheading = Userheadings.getFields();
       final customerheadings = Customerheadings.getFields();
       final staffheadings = Staffheadings.getFields();
+      final productheadings = Productheadings.getFields();
+
       _userSheet!.values.insertRow(1, userheading);
       _customerSheet!.values.insertRow(1, customerheadings);
       _staffSheet!.values.insertRow(1, staffheadings);
+      _productSheet!.values.insertRow(1, productheadings);
     } catch (e) {
       print("Init Error: $e");
     }
@@ -74,7 +80,7 @@ class UserSheetsApi {
 
   static Future getCustomers() async {
     List customers = await _customerSheet!.values.allRows(fromRow: 2);
-    return customers ?? [];
+    return customers;
   }
 
   static Future insertStaff(List<Map<String, dynamic>> rowlist) async {
@@ -95,6 +101,11 @@ class UserSheetsApi {
 
   static Future getStaffs() async {
     List staffs = await _staffSheet!.values.allRows(fromRow: 2);
-    return staffs ?? [];
+    return staffs;
+  }
+
+  static Future getProducts() async {
+    List products = await _productSheet!.values.allRows(fromRow: 2);
+    return products;
   }
 }
