@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Konnect',
             primaryIconTheme:
                 IconThemeData(color: Color(0xff009b63), size: 900)),
-        home: Loginpage(
-          master: false,
+        home: Staffs(
+          // master: false,
         ));
   }
 }
