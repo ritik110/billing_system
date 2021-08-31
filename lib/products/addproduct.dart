@@ -443,29 +443,13 @@ class _AddproductState extends State<Addproduct> {
           SizedBox(
             height: 32,
           ),
-          GestureDetector(
-            onTap: () async {
-              Product newProduct = Product(
-                  productName: name,
-                  location: location,
-                  companyName: cName,
-                  category: category,
-                  sellPer: unit,
-                  unit: unit,
-                  sizeQuantity: size,
-                  color: color,
-                  costPrice: cPrice,
-                  expDate: edate,
-                  stockQuantity: stock);
-              if (name != "") {
-                await UserSheetsApi.insertProduct([newProduct.toJson()]);
-                Navigator.pop(context);
-                setState(() {});
-              }
-            },
-            child: Row(
-              children: [
-                Container(
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
                   width: 200,
                   height: 50,
                   color: Color(0xffff4500),
@@ -475,19 +459,40 @@ class _AddproductState extends State<Addproduct> {
                     style: TextStyle(color: Colors.white),
                   )),
                 ),
-                Container(
+              ),
+              GestureDetector(
+                onTap: () async {
+                  Product newProduct = Product(
+                      productName: name,
+                      location: location,
+                      companyName: cName,
+                      category: category,
+                      sellPer: unit,
+                      unit: unit,
+                      sizeQuantity: size,
+                      color: color,
+                      costPrice: cPrice,
+                      expDate: edate,
+                      stockQuantity: stock);
+                  if (name != "") {
+                    await UserSheetsApi.insertProduct([newProduct.toJson()]);
+                    Navigator.pop(context);
+                    setState(() {});
+                  }
+                },
+                child: Container(
                   width: 200,
                   height: 50,
                   color: Colors.green,
                   child: Center(
                       child: Text(
-                        "Add Products",
-                        style: TextStyle(color: Colors.white),
-                      )),
+                    "Add Products",
+                    style: TextStyle(color: Colors.white),
+                  )),
                 ),
-              ],
-            ),
-          )
+              )
+            ],
+          ),
         ],
       ),
     );

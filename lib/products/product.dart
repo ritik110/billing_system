@@ -6,6 +6,8 @@ import 'package:billing_system/services/sheetsapi.dart';
 import 'package:flutter/material.dart';
 
 class Product extends StatefulWidget {
+  final bool master;
+  Product({required this.master});
   @override
   _ProductState createState() => _ProductState();
 }
@@ -88,10 +90,10 @@ class _ProductState extends State<Product> {
               color: Color(0xff2e2e2e),
             ),
             SizedBox(
-              height: height*0.03,
+              height: height * 0.03,
             ),
             Container(
-              height: height*0.7,
+              height: height * 0.7,
               child: SingleChildScrollView(
                 child: Column(children: [
                   for (int k = 0; k < categories.length; k++)
@@ -121,7 +123,10 @@ class _ProductState extends State<Product> {
                                         categories[k] == "-".toUpperCase()
                                             ? "Others"
                                             : categories[k].toUpperCase(),
-                                        style: TextStyle(color: Colors.white,fontFamily: 'GeoramaRegular',fontSize: 18),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'GeoramaRegular',
+                                            fontSize: 18),
                                       ),
                                     ),
                                     Padding(
@@ -173,33 +178,41 @@ class _ProductState extends State<Product> {
                                                       0.92,
                                                   child: Row(
                                                     children: [
-                                                      for (int j =
-                                                              0;
+                                                      for (int j = 0;
                                                           j < 12;
                                                           j++)
                                                         Container(
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    color: Colors
-                                                                        .black,
-                                                                width:0.5)),
-                                                            height: 40,
-                                                            width: j == 0
-                                                                ? 40
-                                                                : ((MediaQuery.of(context).size.width * 0.92 -
-                                                                        40) /
-                                                                    (11)),
-                                                            child: Padding(
-                                                              padding: const EdgeInsets.fromLTRB(8,0 , 0, 0),
-                                                              child: Text(j ==
-                                                                      0
+                                                          decoration: BoxDecoration(
+                                                              border: Border.all(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  width: 0.5)),
+                                                          height: 40,
+                                                          width: j == 0
+                                                              ? 40
+                                                              : ((MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.92 -
+                                                                      40) /
+                                                                  (11)),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .fromLTRB(
+                                                                    8, 0, 0, 0),
+                                                            child: Text(
+                                                              j == 0
                                                                   ? (i + 1)
                                                                       .toString()
                                                                   : products[i]
-                                                                      [
-                                                                      j - 1],
-                                                                style:TextStyle(fontFamily: 'GeoramaRegular'),),
-                                                            ),)
+                                                                      [j - 1],
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      'GeoramaRegular'),
+                                                            ),
+                                                          ),
+                                                        )
                                                     ],
                                                   ),
                                                 )
@@ -216,39 +229,41 @@ class _ProductState extends State<Product> {
                 ]),
               ),
             ),
-            Container(
-              width: double.infinity,
-              alignment: Alignment.centerRight,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => Addproduct(
-                                categories: categories,
-                              )));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(50, 10, 65, 10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 2),
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.green),
-                    height: height*0.06,
-                    width: 150,
-                    child: Center(
-                      child: Text(
-                        "Add Product",
-                        style: TextStyle(
-                          color: Colors.white,
+            widget.master
+                ? Container(
+                    width: double.infinity,
+                    alignment: Alignment.centerRight,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => Addproduct(
+                                      categories: categories,
+                                    )));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(50, 10, 65, 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white, width: 2),
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.green),
+                          height: height * 0.06,
+                          width: 150,
+                          child: Center(
+                            child: Text(
+                              "Add Product",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ),
-            ),
+                  )
+                : SizedBox.shrink(),
           ],
         ),
       ),

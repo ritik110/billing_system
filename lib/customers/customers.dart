@@ -1,11 +1,10 @@
-import 'package:billing_system/components/tableheading.dart';
-import 'package:billing_system/customers/buttons.dart';
 import 'package:billing_system/models/customer.dart';
 import 'package:billing_system/services/sheetsapi.dart';
 import 'package:flutter/material.dart';
 
 class Customers extends StatefulWidget {
-  const Customers({Key? key}) : super(key: key);
+  final bool master;
+  Customers({required this.master});
 
   @override
   _CustomersState createState() => _CustomersState();
@@ -15,6 +14,9 @@ class _CustomersState extends State<Customers> {
   bool pressed = false;
   int active = -1;
   List customers = [];
+  // bool loading0 = false;
+  // bool loading1 = false;
+  // bool loading2 = false;
 
   List customer = ["", "", "", "", "", "", "", ""];
   List heading = [
@@ -209,175 +211,194 @@ class _CustomersState extends State<Customers> {
                     ),
                   )
                 ]))),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            InkWell(
-                onTap: () async {
-                  if (active == customers.length - 1) {
-                    if (customer[0] != "" && customer[1] != "") {
-                      Customer newCustomer = Customer(
-                          customer: customer[1].toString(),
-                          address: customer[2].toString() == ""
-                              ? "-"
-                              : customer[2].toString(),
-                          contact: customer[3].toString() == ""
-                              ? "-"
-                              : customer[3].toString(),
-                          contracter: customer[4].toString() == ""
-                              ? "-"
-                              : customer[4].toString(),
-                          credit: customer[5].toString() == ""
-                              ? "-"
-                              : customer[5].toString(),
-                          status: customer[6].toString() == ""
-                              ? "-"
-                              : customer[6].toString(),
-                          remarks: customer[7].toString() == ""
-                              ? "-"
-                              : customer[7].toString());
+        widget.master
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  InkWell(
+                      onTap: () async {
+                        if (active == customers.length - 1) {
+                          Future.delayed(Duration(seconds: 5));
+                          if (customer[0] != "" && customer[1] != "") {
+                            Customer newCustomer = Customer(
+                                customer: customer[1].toString(),
+                                address: customer[2].toString() == ""
+                                    ? "-"
+                                    : customer[2].toString(),
+                                contact: customer[3].toString() == ""
+                                    ? "-"
+                                    : customer[3].toString(),
+                                contracter: customer[4].toString() == ""
+                                    ? "-"
+                                    : customer[4].toString(),
+                                credit: customer[5].toString() == ""
+                                    ? "-"
+                                    : customer[5].toString(),
+                                status: customer[6].toString() == ""
+                                    ? "-"
+                                    : customer[6].toString(),
+                                remarks: customer[7].toString() == ""
+                                    ? "-"
+                                    : customer[7].toString());
+                            await UserSheetsApi.insertCustomer(
+                                [newCustomer.toJson()]);
+                            Future.delayed(Duration(seconds: 2)).then((value) {
+                              customer = ["", "", "", "", "", "", "", ""];
+                              active = -1;
+                              getCustomers();
+                            });
+                          }
+                        }
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 2),
+                            borderRadius: BorderRadius.circular(5),
+                            color: active == customers.length - 1
+                                ? Colors.green
+                                : Colors.grey,
+                          ),
+                          height: 40,
+                          width: 150,
+                          child: Center(
+                            child: Text(
+                              "Add Customer",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )),
+                  InkWell(
+                    onTap: () async {
+                      if (active >= 0 && active < customers.length - 1) {
+                        if (customer[0] != "" && customer[1] != "") {
+                          Map<String, dynamic> newCustomer = {
+                            "customer": customer[1].toString(),
+                            "address": customer[2].toString() == ""
+                                ? "-"
+                                : customer[2].toString(),
+                            "contact": customer[3].toString() == ""
+                                ? "-"
+                                : customer[3].toString(),
+                            "contracter": customer[4].toString() == ""
+                                ? "-"
+                                : customer[4].toString(),
+                            "credit": customer[5].toString() == ""
+                                ? "-"
+                                : customer[5].toString(),
+                            "status": customer[6].toString() == ""
+                                ? "-"
+                                : customer[6].toString(),
+                            "remarks": customer[7].toString() == ""
+                                ? "-"
+                                : customer[7].toString()
+                          };
 
-                      await UserSheetsApi.insertCustomer(
-                          [newCustomer.toJson()]);
-                      Future.delayed(Duration(seconds: 2)).then((value) {
-                        customer = ["", "", "", "", "", "", "", ""];
-                        active = -1;
-                        getCustomers();
-                        setState(() {});
-                      });
-                    }
-                  }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 2),
-                      borderRadius: BorderRadius.circular(5),
-                      color: active == customers.length - 1
-                          ? Colors.green
-                          : Colors.grey,
-                    ),
-                    height: 40,
-                    width: 150,
-                    child: Center(
-                      child: Text(
-                        "Add Customer",
-                        style: TextStyle(
-                          color: Colors.white,
+                          await UserSheetsApi.insertCustomerAt(
+                              newCustomer, customer[0]);
+                          Future.delayed(Duration(seconds: 2)).then((value) {
+                            customer = ["", "", "", "", "", "", "", ""];
+                            active = -1;
+                            getCustomers();
+                            setState(() {});
+                          });
+                        }
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 2),
+                          borderRadius: BorderRadius.circular(5),
+                          color: active >= 0 && active < customers.length - 1
+                              ? Color(0xff009b63)
+                              : Colors.grey,
+                        ),
+                        height: 40,
+                        width: 150,
+                        child: Center(
+                          child: Text(
+                            "Edit Customer",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                )),
-            InkWell(
-              onTap: () async {
-                if (active >= 0 && active < customers.length - 1) {
-                  if (customer[0] != "" && customer[1] != "") {
-                    Map<String, dynamic> newCustomer = {
-                      "customer": customer[1].toString(),
-                      "address": customer[2].toString() == ""
-                          ? "-"
-                          : customer[2].toString(),
-                      "contact": customer[3].toString() == ""
-                          ? "-"
-                          : customer[3].toString(),
-                      "contracter": customer[4].toString() == ""
-                          ? "-"
-                          : customer[4].toString(),
-                      "credit": customer[5].toString() == ""
-                          ? "-"
-                          : customer[5].toString(),
-                      "status": customer[6].toString() == ""
-                          ? "-"
-                          : customer[6].toString(),
-                      "remarks": customer[7].toString() == ""
-                          ? "-"
-                          : customer[7].toString()
-                    };
-
-                    await UserSheetsApi.insertCustomerAt(
-                        newCustomer, customer[0]);
-                    Future.delayed(Duration(seconds: 2)).then((value) {
-                      customer = ["", "", "", "", "", "", "", ""];
-                      active = -1;
-                      getCustomers();
-                      setState(() {});
-                    });
-                  }
-                }
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 2),
-                    borderRadius: BorderRadius.circular(5),
-                    color: active >= 0 && active < customers.length - 1
-                        ? Colors.green
-                        : Colors.grey,
-                  ),
-                  height: 40,
-                  width: 150,
-                  child: Center(
-                    child: Text(
-                      "Edit Customer",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                if (active >= 0 && active < customers.length - 1) {
-                  UserSheetsApi.deleteCustomerAt(customer[0]);
-                  Future.delayed(Duration(seconds: 2)).then((value) {
-                    customer = ["", "", "", "", "", "", "", ""];
-                    active = -1;
-                    getCustomers();
-                    setState(() {});
-                  });
-                }
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 2),
-                    borderRadius: BorderRadius.circular(5),
-                    color: active >= 0 && active < customers.length - 1
-                        ? Colors.green
-                        : Colors.grey,
-                  ),
-                  height: 40,
-                  width: 150,
-                  child: Center(
-                    child: Text(
-                      "Delete",
-                      style: TextStyle(
-                        color: Colors.white,
+                  InkWell(
+                    onTap: () {
+                      if (active >= 0 && active < customers.length - 1) {
+                        UserSheetsApi.deleteCustomerAt(customer[0]);
+                        Future.delayed(Duration(seconds: 2)).then((value) {
+                          customer = ["", "", "", "", "", "", "", ""];
+                          active = -1;
+                          getCustomers();
+                          setState(() {});
+                        });
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 2),
+                          borderRadius: BorderRadius.circular(5),
+                          color: active >= 0 && active < customers.length - 1
+                              ? Color(0xff009b63)
+                              : Colors.grey,
+                        ),
+                        height: 40,
+                        width: 150,
+                        child: Center(
+                          child: Text(
+                            "Delete",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  active = -1;
-                  customer = ["", "", "", "", "", "", "", ""];
-                });
-              },
-              child: Buttons(
-                text: "Cancel",
-                color: Colors.green,
-              ),
-            )
-          ],
-        )
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        active = -1;
+                        customer = ["", "", "", "", "", "", "", ""];
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 2),
+                          borderRadius: BorderRadius.circular(5),
+                          color: active >= 0 && active < customers.length - 1
+                              ? Color(0xff009b63)
+                              : Colors.grey,
+                        ),
+                        height: 40,
+                        width: 150,
+                        child: Center(
+                          child: Text(
+                            "Cancel",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              )
+            : SizedBox.shrink()
       ]),
     ));
   }

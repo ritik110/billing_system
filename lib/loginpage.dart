@@ -4,7 +4,8 @@ import 'package:billing_system/text.dart';
 import 'package:flutter/material.dart';
 
 class Loginpage extends StatefulWidget {
-  const Loginpage({Key? key}) : super(key: key);
+  final bool master;
+  Loginpage({required this.master});
 
   @override
   _LoginpageState createState() => _LoginpageState();
@@ -19,16 +20,21 @@ class _LoginpageState extends State<Loginpage> {
     setState(() {
       loading = true;
     });
-    if (username == null) {
+    if (username == null ||
+        (widget.master == false && username != "admin") ||
+        (widget.master == true && username == "admin")) {
+      print("0");
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.red,
-          content: Text('Enter a Username'),
+          content: Text('Enter a valid Username'),
         ),
       );
     } else {
+      print("0.5");
       final user = await UserSheetsApi.getByUsername(username ?? "none");
       if (user == null) {
+        print("1");
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             backgroundColor: Colors.red,
@@ -36,7 +42,9 @@ class _LoginpageState extends State<Loginpage> {
           ),
         );
       } else {
+        print("2");
         if (password == null) {
+          print("3");
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               backgroundColor: Colors.red,
@@ -44,12 +52,16 @@ class _LoginpageState extends State<Loginpage> {
             ),
           );
         } else if (user.password == password) {
+          print("4");
           //navigate to next page
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => Homescreen()));
+                  builder: (BuildContext context) => Homescreen(
+                        master: widget.master,
+                      )));
         } else if (user.password != password) {
+          print("5");
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               backgroundColor: Colors.red,
@@ -228,11 +240,13 @@ class _LoginpageState extends State<Loginpage> {
                             width: 130,
                             height: 40,
                             child: loading
-                                ? SizedBox(height: 20,width: 20,
-                                  child: CircularProgressIndicator(
+                                ? SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
                                       color: Colors.white,
                                     ),
-                                )
+                                  )
                                 : Text("Submit",
                                     style: TextStyle(
                                       color: Colors.white,

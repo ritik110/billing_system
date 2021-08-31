@@ -127,7 +127,7 @@ class _StaffsState extends State<Staffs> {
                                         child: Container(
                                           decoration: BoxDecoration(
                                               color: active == i
-                                                  ? Colors.green
+                                                  ? Color(0xff9b9b9b)
                                                   : Colors.white,
                                               border: Border.all(
                                                   color: Colors.black)),
@@ -224,7 +224,7 @@ class _StaffsState extends State<Staffs> {
                           border: Border.all(color: Colors.white, width: 2),
                           borderRadius: BorderRadius.circular(5),
                           color: active == staffs.length - 1
-                              ? Colors.green
+                              ? Color(0xff009b63)
                               : Colors.grey,
                         ),
                         height: 40,
@@ -282,7 +282,7 @@ class _StaffsState extends State<Staffs> {
                         border: Border.all(color: Colors.white, width: 2),
                         borderRadius: BorderRadius.circular(5),
                         color: active >= 0 && active < staffs.length - 1
-                            ? Colors.green
+                            ? Color(0xff009b63)
                             : Colors.grey,
                       ),
                       height: 40,
@@ -315,7 +315,7 @@ class _StaffsState extends State<Staffs> {
                         border: Border.all(color: Colors.white, width: 2),
                         borderRadius: BorderRadius.circular(5),
                         color: active >= 0 && active < staffs.length - 1
-                            ? Colors.green
+                            ? Color(0xff009b63)
                             : Colors.grey,
                       ),
                       height: 40,
@@ -338,9 +338,27 @@ class _StaffsState extends State<Staffs> {
                       staff = ["", "", "", "", "", "", "", ""];
                     });
                   },
-                  child: Buttons(
-                    text: "Cancel",
-                    color: Colors.green,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 2),
+                        borderRadius: BorderRadius.circular(5),
+                        color: active >= 0 && active < staffs.length - 1
+                            ? Color(0xff009b63)
+                            : Colors.grey,
+                      ),
+                      height: 40,
+                      width: 150,
+                      child: Center(
+                        child: Text(
+                          "Cancel",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 )
               ],

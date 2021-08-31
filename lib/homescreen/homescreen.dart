@@ -1,10 +1,13 @@
 import 'package:billing_system/customers/customers.dart';
+import 'package:billing_system/loginpage.dart';
 import 'package:billing_system/products/product.dart';
 import 'package:billing_system/staffs/staff.dart';
 import 'package:flutter/material.dart';
 import 'package:billing_system/icons.dart';
 
 class Homescreen extends StatefulWidget {
+  final bool master;
+  Homescreen({required this.master});
   @override
   _HomescreenState createState() => _HomescreenState();
 }
@@ -12,7 +15,7 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int active = 0;
-  List pages = [first_page(), Customers(), Staffs(), Product()];
+  late List pages;
   Color color = Colors.white;
   Color colors = Color(0xff009b63);
   Color colorss = Color(0xff5b5b5b);
@@ -24,6 +27,14 @@ class _HomescreenState extends State<Homescreen> {
 
   @override
   void initState() {
+    pages = [
+      first_page(),
+      Customers(master: widget.master),
+      Staffs(),
+      Product(
+        master: widget.master,
+      )
+    ];
     _searchFocus.addListener(() {
       if (_searchFocus.hasFocus) {
         setState(() {
@@ -162,27 +173,29 @@ class _HomescreenState extends State<Homescreen> {
                         SizedBox(
                           height: 20,
                         ),
-                        ListTile(
-                            dense: true,
-                            leading: Icon(
-                              MyFlutterApp.staff,
-                              size: 20,
-                              color: Colors.white,
-                            ),
-                            title: Text(
-                              "Staff Details",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Konnect",
-                                fontSize: 14,
-                              ),
-                            ),
-                            onTap: () {
-                              setState(() {
-                                active = 2;
-                              });
-                              Navigator.pop(context);
-                            }),
+                        widget.master == true
+                            ? ListTile(
+                                dense: true,
+                                leading: Icon(
+                                  MyFlutterApp.staff,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
+                                title: Text(
+                                  "Staff Details",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Konnect",
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    active = 2;
+                                  });
+                                  Navigator.pop(context);
+                                })
+                            : SizedBox.shrink(),
                         ListTile(
                           dense: true,
                           subtitle: salaryActive
@@ -652,7 +665,15 @@ class _HomescreenState extends State<Homescreen> {
                           alignment: Alignment.centerRight,
                           iconSize: 20,
                           color: Color(0xff383838),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        Loginpage(
+                                          master: true,
+                                        )));
+                          },
                         )),
                 SizedBox(
                   width: 20,
@@ -663,7 +684,14 @@ class _HomescreenState extends State<Homescreen> {
                     alignment: Alignment.centerRight,
                     iconSize: 20,
                     color: Color(0xff2e2e2e),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => Loginpage(
+                                    master: false,
+                                  )));
+                    },
                   ),
                 ),
               ],
