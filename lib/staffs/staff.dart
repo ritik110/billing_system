@@ -64,22 +64,22 @@ class _StaffsState extends State<Staffs> {
               children: [
                 Container(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(40, 20, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(40, 10, 0, 0),
                     child: Text(
-                      "staffs",
+                      "Staffs",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 16,
                         color: Color(0xff2e2e2e),
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: Icon(
                     Icons.keyboard_arrow_right,
                     color: Color(0xff2e2e2e),
-                    size: 35,
+                    size: 24,
                   ),
                 )
               ],
@@ -229,7 +229,7 @@ class _StaffsState extends State<Staffs> {
                   ),
                 ),
                 Visibility(
-                  visible : active >= 0 && active < 2
+                  visible : active >= 0 && active < staff.length - 1
                       ? _isVisible
                       : !_isVisible,
                   child: Padding(
@@ -366,6 +366,38 @@ class _StaffsState extends State<Staffs> {
                         },
                         child: Text(
                           "Delete Staff",
+                          style: TextStyle(
+                            fontFamily: 'GeoramaRegular',
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Visibility(
+                  visible: active >= 0 && active < staff.length - 1
+                      ? _isVisible
+                      : !_isVisible,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 20, 80, 20),
+                    child: SizedBox(
+                      height: 40,
+                      width: 100,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(5),
+                          primary: Color(0xff009b63),
+                          onSurface: Color(0xff009b63),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            active = -1;
+                            staff = ["", "", "", "", "", "", "", ""];
+                          });
+                        },
+                        child: Text(
+                          "Cancel",
                           style: TextStyle(
                             fontFamily: 'GeoramaRegular',
                             color: Colors.white,

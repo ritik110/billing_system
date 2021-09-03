@@ -1,6 +1,8 @@
 import 'package:billing_system/models/customer.dart';
 import 'package:billing_system/services/sheetsapi.dart';
 import 'package:flutter/material.dart';
+import 'addCustomer.dart';
+import 'editCustomer.dart';
 
 class Customers extends StatefulWidget {
   final bool master;
@@ -12,6 +14,8 @@ class Customers extends StatefulWidget {
 
 class _CustomersState extends State<Customers> {
   bool pressed = false;
+  final bool isFirstItem = false;
+  final bool isLastItem = false;
   int active = -1;
   List customers = [];
   // bool loading0 = false;
@@ -20,7 +24,7 @@ class _CustomersState extends State<Customers> {
 
   List customer = ["", "", "", "", "", "", "", ""];
   List heading = [
-    "Sn",
+    "SN",
     "CUSTOMER",
     "ADDRESS",
     "CONTACT",
@@ -50,6 +54,13 @@ class _CustomersState extends State<Customers> {
     super.initState();
   }
 
+  bool _isVisible = true;
+  void vis() {
+    setState(() {
+      _isVisible = !_isVisible;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -61,22 +72,22 @@ class _CustomersState extends State<Customers> {
           children: [
             Container(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(40, 20, 0, 0),
+                padding: const EdgeInsets.fromLTRB(40, 10, 0, 0),
                 child: Text(
                   "Customers",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                     color: Color(0xff2e2e2e),
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Icon(
                 Icons.keyboard_arrow_right,
                 color: Color(0xff2e2e2e),
-                size: 35,
+                size: 24,
               ),
             )
           ],
@@ -160,6 +171,7 @@ class _CustomersState extends State<Customers> {
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.vertical(top: isFirstItem? Radius.zero : Radius.zero, bottom: isLastItem? Radius.circular(8) : Radius.zero),
                                               color: active == i
                                                   ? Color(0xff9b9b9b)
                                                   : Colors.white,
@@ -216,149 +228,32 @@ class _CustomersState extends State<Customers> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  InkWell(
-                      onTap: () async {
-                        if (active == customers.length - 1) {
-                          Future.delayed(Duration(seconds: 5));
-                          if (customer[0] != "" && customer[1] != "") {
-                            Customer newCustomer = Customer(
-                                customer: customer[1].toString(),
-                                address: customer[2].toString() == ""
-                                    ? "-"
-                                    : customer[2].toString(),
-                                contact: customer[3].toString() == ""
-                                    ? "-"
-                                    : customer[3].toString(),
-                                contracter: customer[4].toString() == ""
-                                    ? "-"
-                                    : customer[4].toString(),
-                                credit: customer[5].toString() == ""
-                                    ? "-"
-                                    : customer[5].toString(),
-                                status: customer[6].toString() == ""
-                                    ? "-"
-                                    : customer[6].toString(),
-                                remarks: customer[7].toString() == ""
-                                    ? "-"
-                                    : customer[7].toString());
-                            await UserSheetsApi.insertCustomer(
-                                [newCustomer.toJson()]);
-                            Future.delayed(Duration(seconds: 2)).then((value) {
-                              customer = ["", "", "", "", "", "", "", ""];
-                              active = -1;
-                              getCustomers();
-                            });
-                          }
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white, width: 2),
-                            borderRadius: BorderRadius.circular(5),
-                            color: active == customers.length - 1
-                                ? Colors.green
-                                : Colors.grey,
-                          ),
-                          height: 40,
-                          width: 150,
-                          child: Center(
-                            child: Text(
-                              "Add Customer",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )),
-                  InkWell(
-                    onTap: () async {
-                      if (active >= 0 && active < customers.length - 1) {
-                        if (customer[0] != "" && customer[1] != "") {
-                          Map<String, dynamic> newCustomer = {
-                            "customer": customer[1].toString(),
-                            "address": customer[2].toString() == ""
-                                ? "-"
-                                : customer[2].toString(),
-                            "contact": customer[3].toString() == ""
-                                ? "-"
-                                : customer[3].toString(),
-                            "contracter": customer[4].toString() == ""
-                                ? "-"
-                                : customer[4].toString(),
-                            "credit": customer[5].toString() == ""
-                                ? "-"
-                                : customer[5].toString(),
-                            "status": customer[6].toString() == ""
-                                ? "-"
-                                : customer[6].toString(),
-                            "remarks": customer[7].toString() == ""
-                                ? "-"
-                                : customer[7].toString()
-                          };
-
-                          await UserSheetsApi.insertCustomerAt(
-                              newCustomer, customer[0]);
-                          Future.delayed(Duration(seconds: 2)).then((value) {
-                            customer = ["", "", "", "", "", "", "", ""];
-                            active = -1;
-                            getCustomers();
-                            setState(() {});
-                          });
-                        }
-                      }
-                    },
+                  Visibility(
+                    visible: active == customers.length - 1
+                        ? !_isVisible
+                        : _isVisible,
                     child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white, width: 2),
-                          borderRadius: BorderRadius.circular(5),
-                          color: active >= 0 && active < customers.length - 1
-                              ? Color(0xff009b63)
-                              : Colors.grey,
-                        ),
+                      padding: const EdgeInsets.fromLTRB(0, 20, 80, 20),
+                      child: SizedBox(
                         height: 40,
-                        width: 150,
-                        child: Center(
-                          child: Text(
-                            "Edit Customer",
-                            style: TextStyle(color: Colors.white),
+                        width: 100,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.all(5),
+                            primary: Color(0xff009b63),
+                            onSurface: Color(0xff009b63),
                           ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      if (active >= 0 && active < customers.length - 1) {
-                        UserSheetsApi.deleteCustomerAt(customer[0]);
-                        Future.delayed(Duration(seconds: 2)).then((value) {
-                          customer = ["", "", "", "", "", "", "", ""];
-                          active = -1;
-                          getCustomers();
-                          setState(() {});
-                        });
-                      }
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white, width: 2),
-                          borderRadius: BorderRadius.circular(5),
-                          color: active >= 0 && active < customers.length - 1
-                              ? Color(0xff009b63)
-                              : Colors.grey,
-                        ),
-                        height: 40,
-                        width: 150,
-                        child: Center(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return addCustomer();
+                                });
+                          },
                           child: Text(
-                            "Delete",
+                            "Add Customer",
                             style: TextStyle(
+                              fontFamily: 'GeoramaRegular',
                               color: Colors.white,
                             ),
                           ),
@@ -366,36 +261,379 @@ class _CustomersState extends State<Customers> {
                       ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        active = -1;
-                        customer = ["", "", "", "", "", "", "", ""];
-                      });
-                    },
+                  Visibility(
+                    visible: active >= 0 && active < customer.length - 1 ? _isVisible : !_isVisible,
                     child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white, width: 2),
-                          borderRadius: BorderRadius.circular(5),
-                          color: active >= 0 && active < customers.length - 1
-                              ? Color(0xff009b63)
-                              : Colors.grey,
-                        ),
+                      padding: const EdgeInsets.fromLTRB(0, 20, 80, 20),
+                      child: SizedBox(
                         height: 40,
-                        width: 150,
-                        child: Center(
+                        width: 100,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.all(5),
+                            primary: Color(0xff009b63),
+                            onSurface: Color(0xff009b63),
+                          ),
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return editCustomer();
+                                });
+                          },
+                          child: Text(
+                            "Edit Customer",
+                            style: TextStyle(
+                              fontFamily: 'GeoramaRegular',
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: active >= 0 && active < customer.length - 1
+                        ? _isVisible
+                        : !_isVisible,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 20, 80, 20),
+                      child: SizedBox(
+                        height: 40,
+                        width: 100,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.all(5),
+                            primary: Color(0xff009b63),
+                            onSurface: Color(0xff009b63),
+                          ),
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    backgroundColor: Color(0xff383838),
+                                    scrollable: true,
+                                    title: Center(
+                                      child: Text(
+                                        'delete confirmation'.toUpperCase(),
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                    content: Column(children: [
+                                      Divider(
+                                        color: Colors.white,
+                                        height: 5,
+                                        thickness: 2,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(0),
+                                        child: Form(
+                                          child: Container(
+                                            height: 100,
+                                            width: 300,
+                                            color: Color(0xff383838),
+                                            child: DefaultTextStyle.merge(
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.white,
+                                                  fontFamily: 'GeoramaRegular'),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Are you sure you want to delete this?",
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontFamily:
+                                                            'GeoramaRegular'),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .fromLTRB(0, 20, 0, 10),
+                                                    child: Center(
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          GestureDetector(
+                                                            onTap: () async {},
+                                                            child: Container(
+                                                              width: 100,
+                                                              height: 30,
+                                                              color: Color(
+                                                                  0xff009b63),
+                                                              child: Center(
+                                                                  child: Text(
+                                                                "Yes",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white),
+                                                              )),
+                                                            ),
+                                                          ),
+                                                          SizedBox(width: 50),
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            child: Container(
+                                                              width: 100,
+                                                              height: 30,
+                                                              color: Color(
+                                                                  0xffff4500),
+                                                              child: Center(
+                                                                  child: Text(
+                                                                "No",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white),
+                                                              )),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                                  );
+                                });
+                          },
+                          child: Text(
+                            "Delete Customer",
+                            style: TextStyle(
+                              fontFamily: 'GeoramaRegular',
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: active >= 0 && active < customer.length - 1
+                        ? _isVisible
+                        : !_isVisible,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 20, 80, 20),
+                      child: SizedBox(
+                        height: 40,
+                        width: 100,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.all(5),
+                            primary: Color(0xff009b63),
+                            onSurface: Color(0xff009b63),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              active = -1;
+                              customer = ["", "", "", "", "", "", "", ""];
+                            });
+                          },
                           child: Text(
                             "Cancel",
                             style: TextStyle(
+                              fontFamily: 'GeoramaRegular',
                               color: Colors.white,
                             ),
                           ),
                         ),
                       ),
                     ),
-                  )
+                  ),
+                  // InkWell(
+                  //     onTap: () async {
+                  //       if (active == customers.length - 1) {
+                  //         Future.delayed(Duration(seconds: 5));
+                  //         if (customer[0] != "" && customer[1] != "") {
+                  //           Customer newCustomer = Customer(
+                  //               customer: customer[1].toString(),
+                  //               address: customer[2].toString() == ""
+                  //                   ? "-"
+                  //                   : customer[2].toString(),
+                  //               contact: customer[3].toString() == ""
+                  //                   ? "-"
+                  //                   : customer[3].toString(),
+                  //               contracter: customer[4].toString() == ""
+                  //                   ? "-"
+                  //                   : customer[4].toString(),
+                  //               credit: customer[5].toString() == ""
+                  //                   ? "-"
+                  //                   : customer[5].toString(),
+                  //               status: customer[6].toString() == ""
+                  //                   ? "-"
+                  //                   : customer[6].toString(),
+                  //               remarks: customer[7].toString() == ""
+                  //                   ? "-"
+                  //                   : customer[7].toString());
+                  //           await UserSheetsApi.insertCustomer(
+                  //               [newCustomer.toJson()]);
+                  //           Future.delayed(Duration(seconds: 2)).then((value) {
+                  //             customer = ["", "", "", "", "", "", "", ""];
+                  //             active = -1;
+                  //             getCustomers();
+                  //           });
+                  //         }
+                  //       }
+                  //     },
+                  //     child: Padding(
+                  //       padding: const EdgeInsets.all(20),
+                  //       child: Container(
+                  //         decoration: BoxDecoration(
+                  //           border: Border.all(color: Colors.white, width: 2),
+                  //           borderRadius: BorderRadius.circular(5),
+                  //           color: active == customers.length - 1
+                  //               ? Colors.green
+                  //               : Colors.grey,
+                  //         ),
+                  //         height: 40,
+                  //         width: 150,
+                  //         child: Center(
+                  //           child: Text(
+                  //             "Add Customer",
+                  //             style: TextStyle(
+                  //               color: Colors.white,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     )),
+                  // InkWell(
+                  //   onTap: () async {
+                  //     if (active >= 0 && active < customers.length - 1) {
+                  //       if (customer[0] != "" && customer[1] != "") {
+                  //         Map<String, dynamic> newCustomer = {
+                  //           "customer": customer[1].toString(),
+                  //           "address": customer[2].toString() == ""
+                  //               ? "-"
+                  //               : customer[2].toString(),
+                  //           "contact": customer[3].toString() == ""
+                  //               ? "-"
+                  //               : customer[3].toString(),
+                  //           "contracter": customer[4].toString() == ""
+                  //               ? "-"
+                  //               : customer[4].toString(),
+                  //           "credit": customer[5].toString() == ""
+                  //               ? "-"
+                  //               : customer[5].toString(),
+                  //           "status": customer[6].toString() == ""
+                  //               ? "-"
+                  //               : customer[6].toString(),
+                  //           "remarks": customer[7].toString() == ""
+                  //               ? "-"
+                  //               : customer[7].toString()
+                  //         };
+                  //
+                  //         await UserSheetsApi.insertCustomerAt(
+                  //             newCustomer, customer[0]);
+                  //         Future.delayed(Duration(seconds: 2)).then((value) {
+                  //           customer = ["", "", "", "", "", "", "", ""];
+                  //           active = -1;
+                  //           getCustomers();
+                  //           setState(() {});
+                  //         });
+                  //       }
+                  //     }
+                  //   },
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(20),
+                  //     child: Container(
+                  //       decoration: BoxDecoration(
+                  //         border: Border.all(color: Colors.white, width: 2),
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         color: active >= 0 && active < customers.length - 1
+                  //             ? Color(0xff009b63)
+                  //             : Colors.grey,
+                  //       ),
+                  //       height: 40,
+                  //       width: 150,
+                  //       child: Center(
+                  //         child: Text(
+                  //           "Edit Customer",
+                  //           style: TextStyle(color: Colors.white),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     if (active >= 0 && active < customers.length - 1) {
+                  //       UserSheetsApi.deleteCustomerAt(customer[0]);
+                  //       Future.delayed(Duration(seconds: 2)).then((value) {
+                  //         customer = ["", "", "", "", "", "", "", ""];
+                  //         active = -1;
+                  //         getCustomers();
+                  //         setState(() {});
+                  //       });
+                  //     }
+                  //   },
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(20),
+                  //     child: Container(
+                  //       decoration: BoxDecoration(
+                  //         border: Border.all(color: Colors.white, width: 2),
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         color: active >= 0 && active < customers.length - 1
+                  //             ? Color(0xff009b63)
+                  //             : Colors.grey,
+                  //       ),
+                  //       height: 40,
+                  //       width: 150,
+                  //       child: Center(
+                  //         child: Text(
+                  //           "Delete",
+                  //           style: TextStyle(
+                  //             color: Colors.white,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     setState(() {
+                  //       active = -1;
+                  //       customer = ["", "", "", "", "", "", "", ""];
+                  //     });
+                  //   },
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(20),
+                  //     child: Container(
+                  //       decoration: BoxDecoration(
+                  //         border: Border.all(color: Colors.white, width: 2),
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         color: active >= 0 && active < customers.length - 1
+                  //             ? Color(0xff009b63)
+                  //             : Colors.grey,
+                  //       ),
+                  //       height: 40,
+                  //       width: 150,
+                  //       child: Center(
+                  //         child: Text(
+                  //           "Cancel",
+                  //           style: TextStyle(
+                  //             color: Colors.white,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               )
             : SizedBox.shrink()

@@ -106,7 +106,7 @@ class _ProductState extends State<Product> {
                           });
                         },
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(0),
                           child: Column(children: [
                             Container(
                                 color: Color(0xff5b5b5b),
@@ -247,7 +247,7 @@ class _ProductState extends State<Product> {
                         child: Container(
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.white, width: 2),
-                              borderRadius: BorderRadius.circular(5),
+                              borderRadius: BorderRadius.zero,
                               color: Colors.green),
                           height: height * 0.06,
                           width: 150,
