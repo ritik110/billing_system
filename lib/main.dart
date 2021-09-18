@@ -1,5 +1,7 @@
 import 'package:billing_system/customers/customers.dart';
+import 'package:billing_system/date.dart';
 import 'package:billing_system/homescreen/homescreen.dart';
+import 'package:billing_system/invoices/invoice.dart';
 import 'package:billing_system/loginpage.dart';
 import 'package:billing_system/products/addproduct.dart';
 import 'package:billing_system/products/product.dart';
@@ -25,8 +27,8 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Konnect',
             primaryIconTheme:
                 IconThemeData(color: Color(0xff009b63), size: 900)),
-        home: Loginpage(
-          master: true,
-        ));
+        home: Invoice(
+            // master: true,
+            ));
   }
 }

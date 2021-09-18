@@ -1,3 +1,4 @@
+import 'package:billing_system/customers/buttons.dart';
 import 'package:billing_system/models/customer.dart';
 import 'package:billing_system/services/sheetsapi.dart';
 import 'package:flutter/material.dart';
@@ -171,7 +172,14 @@ class _CustomersState extends State<Customers> {
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.vertical(top: isFirstItem? Radius.zero : Radius.zero, bottom: isLastItem? Radius.circular(8) : Radius.zero),
+                                              borderRadius:
+                                                  BorderRadius.vertical(
+                                                      top: isFirstItem
+                                                          ? Radius.zero
+                                                          : Radius.zero,
+                                                      bottom: isLastItem
+                                                          ? Radius.circular(8)
+                                                          : Radius.zero),
                                               color: active == i
                                                   ? Color(0xff9b9b9b)
                                                   : Colors.white,
@@ -262,7 +270,9 @@ class _CustomersState extends State<Customers> {
                     ),
                   ),
                   Visibility(
-                    visible: active >= 0 && active < customer.length - 1 ? _isVisible : !_isVisible,
+                    visible: active >= 0 && active < customer.length - 1
+                        ? _isVisible
+                        : !_isVisible,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 80, 20),
                       child: SizedBox(
